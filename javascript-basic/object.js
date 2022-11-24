@@ -41,5 +41,3 @@ const gsap = {
     console.log(obj + "야 어디에서 여기로 와라");
   },
 };
-
-gsap.to("#aaa");
