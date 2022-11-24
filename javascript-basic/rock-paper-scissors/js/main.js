@@ -36,5 +36,32 @@ ourClass.forEach(function (item, idx) {
 // const comList02 = document.querySelector("#com ul li:nth-child(2)");
 // const comList03 = document.querySelector("#com ul li:nth-child(3)");
 const comList = document.querySelectorAll("#com ul li");
-console.log(comList);
-comList.push("aaa");
+const playerList = document.querySelectorAll("#player ul li");
+//pseudo array
+
+function playerChoice() {
+  playerList.forEach(function (item, idx) {
+    item.addEventListener("click", function () {
+      clearInterval(clearComChoice);
+    });
+  });
+}
+
+function comChoice() {
+  const random = Math.floor(Math.random() * 3);
+  comList.forEach(function (item, idx) {
+    if (idx === random) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+    // 삼항연산자....
+    //idx === random ? (item.style.display = "block") : (item.style.display = "none");
+  });
+}
+//console.log("01");
+//console.log("02");
+//comChoice();
+let clearComChoice = setInterval(comChoice, 20); // 자바스크립트는 비동기적으로 동작한다.
+playerChoice();
+//clearInterval(clearComChoice);
