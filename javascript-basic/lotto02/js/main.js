@@ -15,7 +15,20 @@ for (let i = 0; i < 6; i++) {
 selectedNums.sort(compare);
 selectedNums.forEach(function (item, idx) {
   const li = document.createElement("li");
+  //li.classList.add("yellow");
   li.textContent = item;
+
+  if (item >= 1 && item <= 10) {
+    li.classList.add("yellow");
+  } else if (item >= 11 && item <= 20) {
+    li.classList.add("blue");
+  } else if (item >= 21 && item <= 30) {
+    li.classList.add("red");
+  } else if (item >= 31 && item <= 40) {
+    li.classList.add("gray");
+  } else {
+    li.classList.add("green");
+  }
   ul.appendChild(li);
 });
 

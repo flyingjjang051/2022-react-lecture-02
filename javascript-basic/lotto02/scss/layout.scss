@@ -47,11 +47,33 @@ a {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       background-color: #fff;
       border-radius: 100px;
       margin: 0 5px;
+      color: #fff;
+      overflow: hidden;
+      &.yellow {
+        background-color: #fbc400;
+        @include longShadow(darken(#fbc400, 10), 40);
+      }
+      &.blue {
+        background-color: #69c8f2;
+        @include longShadow(darken(#69c8f2, 10), 40);
+      }
+      &.red {
+        background-color: #ff7272;
+        @include longShadow(darken(#ff7272, 10), 40);
+      }
+      &.gray {
+        background-color: #aaa;
+        @include longShadow(darken(#aaa, 10), 40);
+      }
+      &.green {
+        background-color: #b0d840;
+        @include longShadow(darken(#b0d840, 10), 40);
+      }
     }
   }
 }
