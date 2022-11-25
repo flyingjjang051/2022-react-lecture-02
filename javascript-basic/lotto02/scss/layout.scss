@@ -36,20 +36,64 @@ a {
     }
   }
 }
+.paper {
+  height: 400px;
+  overflow: hidden;
+  //background-color: #f00;
+  margin-top: -13px;
+  position: relative;
+  z-index: 2;
+  .msg {
+    font-weight: 100;
+    font-size: clamp(24px, 20vw, 98px);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    top: 100px;
+  }
+}
 
 #result {
   background-color: #fff;
-  padding: 50px 20px;
-  width: calc(100vw - 40px);
+  padding: 50px 10px;
+  width: calc(100vw - 80px);
   box-sizing: border-box;
   margin: auto;
+  transform: translateY(-150%);
+  box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.35);
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  :after {
+    background: linear-gradient(-45deg, #ffffff 5px, transparent 0), linear-gradient(45deg, #ffffff 5px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 10px 10px;
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 10px;
+    bottom: -10px;
+    transform: rotate(180deg);
+  }
+
+  &.on {
+    transform: translateY(0);
+    transition: all 1s linear;
+  }
   ul {
     display: flex;
     justify-content: center;
     margin-top: 10px;
     li {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -62,25 +106,51 @@ a {
       overflow: hidden;
       box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.15);
       &.yellow {
-        background-color: #fbc400;
-        @include longShadow(darken(#fbc400, 10), 40);
+        $color: #fbc400;
+        background-color: darken($color, 10);
+        @include longShadow(darken($color, 20), 40);
       }
       &.blue {
-        background-color: #69c8f2;
-        @include longShadow(darken(#69c8f2, 10), 40);
+        $color: #69c8f2;
+        background-color: darken($color, 10);
+        @include longShadow(darken($color, 20), 40);
       }
       &.red {
-        background-color: #ff7272;
-        @include longShadow(darken(#ff7272, 10), 40);
+        $color: #ff7272;
+        background-color: darken($color, 10);
+        @include longShadow(darken($color, 20), 40);
       }
       &.gray {
-        background-color: #aaa;
-        @include longShadow(darken(#aaa, 10), 40);
+        $color: #aaa;
+        background-color: darken($color, 10);
+        @include longShadow(darken($color, 20), 40);
       }
       &.green {
-        background-color: #b0d840;
-        @include longShadow(darken(#b0d840, 10), 40);
+        $color: #b0d840;
+        background-color: darken($color, 10);
+        @include longShadow(darken($color, 20), 40);
       }
+    }
+  }
+}
+.wrap {
+  overflow: hidden;
+  padding: 0 20px;
+  .hall {
+    background-color: #222;
+    height: 30px;
+    border-radius: 100px;
+    position: relative;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 15px;
+      right: 15px;
+      height: 8px;
+      background-color: #111;
+      border-radius: 100px;
+      top: calc(50% - 4px);
     }
   }
 }
@@ -93,7 +163,7 @@ a {
     input[type="radio"] {
       display: none;
     }
-    //+,  ~ 는 이웃을 찾아주는 셀렉터
+    //+ 하나만,  ~ 뒤에 오는거 전부다 는 이웃을 찾아주는 셀렉터
     input:checked + span {
       background-color: #f00;
     }

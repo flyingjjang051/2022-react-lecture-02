@@ -3,7 +3,11 @@ const radios = document.querySelectorAll(".radio");
 const colors = ["yellow", "blue", "red", "gray", "green"];
 function makeLotto() {
   const ul = document.createElement("ul");
+  result.classList.remove("on");
   result.appendChild(ul);
+  setTimeout(function () {
+    result.classList.add("on");
+  }, 50);
   const nums = Array(45)
     .fill(10)
     .map(function (current, idx) {
