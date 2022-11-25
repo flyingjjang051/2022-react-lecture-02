@@ -38,39 +38,65 @@ ourClass.forEach(function (item, idx) {
 const comList = document.querySelectorAll("#com ul li");
 const playerList = document.querySelectorAll("#player ul li");
 const result = document.querySelector("#result ul");
+const cover = document.querySelector("#cover");
+// cover.classList.add("on");
 let random = 0;
+let gameCount = 0;
 //pseudo array
 //think aloud
 
 function playerChoice() {
   playerList.forEach(function (item, idx) {
     item.addEventListener("click", function () {
+      document.body.classList.add("blocking");
       clearInterval(clearComChoice);
       const selectedId = parseInt(this.dataset.id);
-      console.log(random, "====", selectedId);
-      //decide(1,1);
       decide(selectedId, random);
+      setTimeout(function () {
+        console.log("나는 바로 실행되지 않고 1초뒤에 한번만 실행됩니다.");
+        clearComChoice = setInterval(comChoice, 20);
+        document.body.classList.remove("blocking");
+      }, 1000);
+      // 리팩토링....
     });
   });
 }
 
 function decide(playerNum, comNum) {
+  const li = document.createElement("li");
+
   if (playerNum === comNum) {
     console.log("draw");
-    result.innerHTML = `<li class="draw">D</li>`;
+    li.textContent = "D";
+    li.classList.add("draw");
+    //result.innerHTML += `<li class="draw">D</li>`;
+    //result.append(`<li class="draw">D</li>`);
   } else if (comNum === 0 && playerNum === 1) {
     console.log("win");
-    result.innerHTML = `<li class="win">W</li>`;
+    li.textContent = "W";
+    li.classList.add("win");
+    //result.innerHTML += `<li class="win">W</li>`;
+    //result.append(`<li class="win">W</li>`);
   } else if (comNum === 1 && playerNum === 2) {
     console.log("win");
-    result.innerHTML = `<li class="win">W</li>`;
+    li.textContent = "W";
+    li.classList.add("win");
+    //result.innerHTML += `<li class="win">W</li>`;
+    //result.append(`<li class="win">W</li>`);
   } else if (comNum === 2 && playerNum === 0) {
     console.log("win");
-    result.innerHTML = `<li class="win">W</li>`;
+    li.textContent = "W";
+    li.classList.add("win");
+    //result.innerHTML += `<li class="win">W</li>`;
+    //result.append(`<li class="win">W</li>`);
   } else {
     console.log("lose");
-    result.innerHTML = `<li class="lose">L</li>`;
+    li.textContent = "L";
+    li.classList.add("lose");
+    //result.innerHTML += `<li class="lose">L</li>`;
+    //result.append(`<li class="lose">L</li>`);
   }
+  result.append(li);
 }
 
 function comChoice() {
@@ -91,4 +117,5 @@ function comChoice() {
 //comChoice();
 let clearComChoice = setInterval(comChoice, 20); // 자바스크립트는 비동기적으로 동작한다.
 playerChoice();
+
 //clearInterval(clearComChoice);
