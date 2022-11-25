@@ -37,18 +37,45 @@ ourClass.forEach(function (item, idx) {
 // const comList03 = document.querySelector("#com ul li:nth-child(3)");
 const comList = document.querySelectorAll("#com ul li");
 const playerList = document.querySelectorAll("#player ul li");
+const result = document.querySelector("#result ul");
+let random = 0;
 //pseudo array
+//think aloud
 
 function playerChoice() {
   playerList.forEach(function (item, idx) {
     item.addEventListener("click", function () {
       clearInterval(clearComChoice);
+      const selectedId = parseInt(this.dataset.id);
+      console.log(random, "====", selectedId);
+      //decide(1,1);
+      decide(selectedId, random);
     });
   });
 }
 
+function decide(playerNum, comNum) {
+  if (playerNum === comNum) {
+    console.log("draw");
+    result.innerHTML = `<li class="draw">D</li>`;
+  } else if (comNum === 0 && playerNum === 1) {
+    console.log("win");
+    result.innerHTML = `<li class="win">W</li>`;
+  } else if (comNum === 1 && playerNum === 2) {
+    console.log("win");
+    result.innerHTML = `<li class="win">W</li>`;
+  } else if (comNum === 2 && playerNum === 0) {
+    console.log("win");
+    result.innerHTML = `<li class="win">W</li>`;
+  } else {
+    console.log("lose");
+    result.innerHTML = `<li class="lose">L</li>`;
+  }
+}
+
 function comChoice() {
-  const random = Math.floor(Math.random() * 3);
+  random = Math.floor(Math.random() * 3);
+  //0:rock,1:paper,2:scissors
   comList.forEach(function (item, idx) {
     if (idx === random) {
       item.style.display = "block";
