@@ -30,3 +30,20 @@ a {
 #header h1 strong {
   font-weight: 700;
 }
+
+#result ul {
+  display: flex;
+  justify-content: center;
+}
+#result ul li {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #fff;
+  border-radius: 100px;
+  margin: 0 5px;
+}
