@@ -59,11 +59,13 @@ function restart() {
       console.log("🚀 ~ file: main.js ~ line 56 ~ selectedCards", selectedCards);
       if (selectedCards.length >= 2) {
         console.log("두번 눌렀다");
+        document.body.classList.add("blocking");
         if (selectedCards[0].dataset.idx === selectedCards[1].dataset.idx) {
           console.log("딩동댕");
           clearIdx01 = setTimeout(function () {
             selectedCards.splice(0, 2);
-          }, 1000);
+            document.body.classList.remove("blocking");
+          }, 500);
           score++;
           console.log(score, "===", end);
           if (score >= end) {
@@ -74,8 +76,9 @@ function restart() {
           clearIdx02 = setTimeout(function () {
             selectedCards[0].classList.remove("on");
             selectedCards[1].classList.remove("on");
+            document.body.classList.remove("blocking");
             selectedCards.splice(0, 2);
-          }, 1000);
+          }, 500);
         }
       }
     });
