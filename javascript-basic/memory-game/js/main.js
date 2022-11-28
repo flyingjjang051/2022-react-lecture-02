@@ -46,6 +46,8 @@ function restart() {
   const selectedCards = [];
   let score = 0;
   const end = memorys.length;
+  let clearIdx01 = null;
+  let clearIdx02 = null;
   items.forEach(function (item, idx) {
     item.addEventListener("click", function () {
       const card = this.querySelector(".card");
@@ -59,20 +61,17 @@ function restart() {
         console.log("두번 눌렀다");
         if (selectedCards[0].dataset.idx === selectedCards[1].dataset.idx) {
           console.log("딩동댕");
-          setTimeout(function () {
+          clearIdx01 = setTimeout(function () {
             selectedCards.splice(0, 2);
           }, 1000);
           score++;
           console.log(score, "===", end);
           if (score >= end) {
-            console.log("끝");
-            // cover보이게 하기
-            // restart 누르면 다시 하기....
             cover.classList.add("on");
           }
         } else {
           console.log("땡");
-          setTimeout(function () {
+          clearIdx02 = setTimeout(function () {
             selectedCards[0].classList.remove("on");
             selectedCards[1].classList.remove("on");
             selectedCards.splice(0, 2);
