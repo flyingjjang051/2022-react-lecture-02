@@ -31,10 +31,39 @@ const ul = document.createElement("ul");
 doubleMemorys.forEach(function (item, idx) {
   //console.log(item);
   const li = document.createElement("li");
-  li.innerHTML = `<div>
-  <img src="${item.img}" alt="" />
-  <p>${item.title}</p>
-</div>`;
+  li.innerHTML = `
+  <div class="card" data-idx="${item.idx}">
+    <div class="front face">
+      <img src="${item.img}" alt="" />
+      <p>${item.title}</p>
+    </div>
+    <div class="back face"></div>
+  </div>
+`;
   ul.appendChild(li);
 });
 main.appendChild(ul);
+
+const items = document.querySelectorAll("#main ul li");
+let firstCard = null;
+let secondCard = null;
+const selectedCards = [];
+items.forEach(function (item, idx) {
+  item.addEventListener("click", function () {
+    const card = this.querySelector(".card");
+    card.classList.add("on");
+    selectedCards.push(parseInt(card.dataset.idx));
+    console.log("🚀 ~ file: main.js ~ line 56 ~ selectedCards", selectedCards);
+    //firstCard = this;
+    //secondCard = card.dataset.idx;
+    if (selectedCards.length >= 2) {
+      console.log("두번 눌렀다");
+      if (selectedCards[0] === selectedCards[1]) {
+        console.log("딩동댕");
+      } else {
+        console.log("땡");
+      }
+      selectedCards.splice(0, 2);
+    }
+  });
+});
