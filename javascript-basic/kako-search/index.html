@@ -11,7 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/fancybox.css" />
     <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/gsap/gsap.min.js"></script>
+    <script src="js/fancybox.umd.js"></script>
     <script src="js/main.js" defer></script>
   </head>
   <body>
@@ -19,6 +22,12 @@
       <h1>KAKAO <strong>IMAGE</strong></h1>
     </header>
     <div>
+      <div id="radio-box">
+        <p>검색할 종류를 선택해 주세요.</p>
+        <label><span> image</span><input type="radio" name="search" id="image" checked /></label>
+        <label><span> vclip</span><input type="radio" name="search" id="vclip" /></label>
+        <label><span> web</span><input type="radio" name="search" id="web" /></label>
+      </div>
       <input type="text" id="search-word" />
     </div>
     <main id="main"></main>
