@@ -39,6 +39,8 @@ work(1000, function (result) {
   });
 });
 */
+// ajax promise, async, await
+
 function workPromise(sec) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {

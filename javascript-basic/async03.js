@@ -15,6 +15,8 @@ result.then(function (response) {
   });
 });
 */
+
+// 비동기의
 async function findUserName(postId) {
   const postResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
   const post = await postResponse.json();
@@ -23,7 +25,7 @@ async function findUserName(postId) {
   const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
   const user = await userResponse.json();
   console.log("user===", user);
-  return user.name;
+  return user;
 }
 findUserName(2).then(function (resolve, reject) {
   console.log(resolve);
