@@ -71,6 +71,29 @@ app.get("/movie02/:title", (req, res) => {
       res.json(response);
     });
 });
+app.get("/papago/:words", (req, res) => {
+  fetch("https://openapi.naver.com/v1/papago/n2mt", {
+    method: "POST",
+    headers: {
+      "X-Naver-Client-Id": "EWAmQ4Hbg6givPZnU5vq",
+      "X-Naver-Client-Secret": "lH56uhLQVV",
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify({
+      target: "en",
+      source: "ko",
+      text: req.params.words,
+    }),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+      res.json(response);
+    });
+});
+app.get("/trans", (req, res) => {
+  res.sendFile(path.join(__dirname, "/public/trans.html"));
+});
 
 app.get("/contact", (req, res) => {
   //res.send("<h1>hello contact</h1>");
