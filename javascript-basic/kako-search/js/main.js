@@ -9,7 +9,7 @@ async function kakaoSearch(query, category) {
       },
     });
     console.log(response);
-    const json = response.json(); // json()
+    const json = await response.json(); // json()
     return json;
   } catch (error) {
     return error;
@@ -39,17 +39,15 @@ searchWord.addEventListener("keyup", function (e) {
   }
 });
 const radios = document.querySelectorAll("#radio-box input");
-console.log("🚀 ~ file: main.js ~ line 42 ~ radios", radios);
+const main = document.querySelector("#main");
 radios.forEach(function (item, idx) {
   item.addEventListener("change", function () {
     const category = this.getAttribute("id");
+    main.innerHTML = "";
+    const ul = document.createElement("ul");
+    main.appendChild(ul);
     if (category === "image") {
       kakaoSearch(searchWord.value, "image").then(function (response) {
-        //console.log(response);
-        const main = document.querySelector("#main");
-        main.innerHTML = "";
-        const ul = document.createElement("ul");
-        main.appendChild(ul);
         const documents = response.documents;
         documents.forEach(function (item, idx) {
           const li = document.createElement("li");
@@ -76,3 +74,13 @@ radios.forEach(function (item, idx) {
     }
   });
 });
+
+async function kakaoSearch02(query, category) {
+  const response = await fetch(`http://dapi.kakao.com/v2/search/${category}?query=${query}`, {
+    headers: {
+      Authorization: "KakaoAK d3a4eac6c386772340213a4ca344fc58",
+    },
+  });
+  const result = await response.json(); // json()
+  return result;
+}
