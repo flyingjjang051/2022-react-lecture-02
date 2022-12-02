@@ -13,6 +13,7 @@ const PORT = app.get("port");
 const aboutRouter = require("./routes/about");
 const majorRouter = require("./routes/major");
 const researchRouter = require("./routes/research");
+const memberRouter = require("./routes/member");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/about", aboutRouter);
 app.use("/major", majorRouter);
 app.use("/research", researchRouter);
+app.use("/member", memberRouter);
 
 app.get("/", (req, res) => {
   res.render("index");

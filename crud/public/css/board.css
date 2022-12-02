@@ -52,7 +52,7 @@
 }
 .bbs.list .bbs-header span.date,
 .bbs.list .bbs-body span.date {
-  width: 120px;
+  width: 200px;
 }
 .bbs.list .bbs-header {
   display: table-header-group;
