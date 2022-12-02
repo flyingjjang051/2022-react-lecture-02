@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment");
 const router = express.Router();
 
 const subTitle = "대학소개는 개뿔";
@@ -6,6 +7,7 @@ const subVisualNo = "01";
 const gnb = "gnb01";
 
 let boardList = [];
+let boardNo = 0;
 
 // db (데이터 베이스)
 
@@ -38,8 +40,10 @@ router.post("/write", (req, res) => {
   //console.log(req.body.subject);
   //console.log(req.body.contents);
   //console.log(req.body);
-  boardList.push({ no: 1, writer: req.body.writer, subject: req.body.subject, date: new Date() });
+  //req.query  주소?writer=장성호
+  //req.params  주소/장성호
+  boardList.push({ no: ++boardNo, writer: req.body.writer, subject: req.body.subject, date: moment().format("YYYY MM DD - hh : mm : ss") });
   res.redirect("/about/list");
 });
-
+console.log(moment().format("YYYY MM DD - hh : mm : ss"));
 module.exports = router;
