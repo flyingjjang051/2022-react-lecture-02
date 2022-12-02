@@ -1,5 +1,5 @@
 <%- include("./header") %>
-<div id="sub-visual" class="sub-visual01">
+<div id="sub-visual" class="sub-visual<%= subVisualNo %>">
   <div class="container">
     <h2 class="sub-title"></h2>
     <div class="bg"></div>
@@ -14,7 +14,7 @@
     </div>
     <div class="lnb02 lnb-box">
       <a href=""><%= contentsTitle %></a>
-      <%- include("./gnb01") %>
+      <%- include(gnb) %>
     </div>
   </div>
 </nav>
