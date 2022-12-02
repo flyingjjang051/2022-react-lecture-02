@@ -1,5 +1,6 @@
 <%- include("./include/sub-header") %>
 <div class="container">
+  <p>Total : <%= list.length %></p>
   <div class="bbs list">
     <div class="bbs-header">
       <span class="no">번호</span>
@@ -8,66 +9,14 @@
       <span class="date">작성일</span>
     </div>
     <ul class="bbs-body">
+      <% list.forEach((item,idx)=>{ %>
       <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
+        <span class="no"><%= item.no %></span>
+        <span class="subject"><a href=""><%= item.subject %></a></span>
+        <span class="writer"><%= item.writer %></span>
+        <span class="date"><%= item.date %></span>
       </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
-      <li>
-        <span class="no">1</span>
-        <span class="subject">2021학년도 이과대학 대학원 우수강의교수상 시상</span>
-        <span class="writer">관리자</span>
-        <span class="date">22.11.04</span>
-      </li>
+      <% }) %>
     </ul>
   </div>
 </div>
