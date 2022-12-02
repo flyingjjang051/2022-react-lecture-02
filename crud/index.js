@@ -14,6 +14,9 @@ const aboutRouter = require("./routes/about");
 const majorRouter = require("./routes/major");
 const researchRouter = require("./routes/research");
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use("/about", aboutRouter);
 app.use("/major", majorRouter);
 app.use("/research", researchRouter);

@@ -1,20 +1,22 @@
 <%- include("./include/sub-header") %>
 <!-- 서버로 내용을 전달하는 방법 1. ajax, 1. form -->
 <div class="container">
-  <form action="/write" id="write-form" method="POST">
-    <div class="">
-      <span>제목</span>
-      <input type="text" id="subject" name="subject" />
+  <form action="/about/write" id="write-form" method="POST">
+    <div class="bbs write">
+      <div class="row">
+        <span>제목</span>
+        <input type="text" id="subject" name="subject" />
+      </div>
+      <div class="row">
+        <span>글쓴이</span>
+        <input type="text" id="writer" name="writer" />
+      </div>
+      <div class="row">
+        <span>내용</span>
+        <textarea name="contents" cols="30" rows="10" id="contents"> </textarea>
+      </div>
+      <div class="btns"><button class="btn btn-write">글쓰기</button><button class="btn btn-reset" type="reset">취소</button></div>
     </div>
-    <div class="">
-      <span>글쓴이</span>
-      <input type="text" id="writer" name="writer" />
-    </div>
-    <div class="">
-      <span>내용</span>
-      <textarea name="contents" cols="30" rows="10" id="contents"> </textarea>
-    </div>
-    <div class="btns"><button class="btn btn-write">글쓰기</button><button class="btn btn-reset">취소</button></div>
   </form>
 </div>
 
