@@ -66,12 +66,42 @@ button {
   background-color: #fff;
   padding: 0 20px;
 }
-#main form .btns {
+#main .login-box {
+  display: flex;
+  justify-content: center;
+}
+#main .login-box a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 144, 228);
+  color: #fff;
+  border-radius: 5px;
+  width: 150px;
+  height: 50px;
+}
+#main .user-info {
+  width: 600px;
+  margin: auto;
+}
+#main .user-info dl {
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  border-bottom: 1px dotted #fff;
+}
+#main .user-info dl dt {
+  width: 100px;
+}
+#main .user-info dl dd {
+  flex-grow: 1;
+}
+#main .btns {
   display: flex;
   justify-content: center;
   margin-top: 50px;
 }
-#main form .btns .btn {
+#main .btns .btn {
   width: 140px;
   height: 50px;
   display: flex;
@@ -81,9 +111,9 @@ button {
   border-radius: 5px;
   margin: 0 5px;
 }
-#main form .btns .btn-confirm {
+#main .btns .btn-confirm {
   background-color: rgb(0, 144, 228);
 }
-#main form .btns .btn-reset {
-  background-color: rgb(206, 206, 206);
+#main .btns .btn-reset {
+  background-color: rgb(165, 165, 165);
 }

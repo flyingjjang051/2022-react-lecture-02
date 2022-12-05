@@ -60,6 +60,14 @@ router.post("/join", async (req, res) => {
 router.get("/login", (req, res) => {
   res.render("./user/login");
 });
+router.get("/info", async (req, res) => {
+  const id = req.query.id;
+  //console.log("🚀 ~ file: user.js:65 ~ router.get ~ id", id);
+  try {
+    const userInfo = await userSchema.findOne({ id: id });
+    res.render("./user/info", { userInfo: userInfo });
+  } catch {}
+});
 
 // async / await
 router.post("/login", async (req, res) => {
@@ -70,7 +78,7 @@ router.post("/login", async (req, res) => {
   // findOne은 하나만 찾기 오브젝트를 리턴한다.
   try {
     const userInfo = await userSchema.findOne({ id: id, password: password }).exec();
-    res.render("./index", { user: userInfo.name });
+    res.render("./index", { user: userInfo.name, id: userInfo.id });
   } catch {
     res.send(`<script>
     alert("id 또는 password를 확인해 주세요."); 

@@ -14,7 +14,7 @@ const userRouter = require("./routes/user");
 app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
-  res.render("./index", { user: "아무개" });
+  res.render("./index", { user: "" });
 });
 
 app.listen(PORT, () => {
