@@ -13,7 +13,7 @@ const userRouter = require("./routes/user");
 app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
-  res.send("hello express");
+  res.render("./index", { user: "아무개" });
 });
 
 app.listen(PORT, () => {

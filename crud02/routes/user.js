@@ -57,6 +57,40 @@ router.post("/join", async (req, res) => {
   }
 });
 
+router.get("/login", (req, res) => {
+  res.render("./user/login");
+});
+
+// async / await
+router.post("/login", async (req, res) => {
+  const id = req.body.id;
+  const password = req.body.password;
+  //console.log(id, "===", password);
+  // find 는 다 찾기 배열을 리턴하다.
+  // findOne은 하나만 찾기 오브젝트를 리턴한다.
+  try {
+    const userInfo = await userSchema.findOne({ id: id, password: password }).exec();
+    res.render("./index", { user: userInfo.name });
+  } catch {
+    res.send(`<script>
+    alert("id 또는 password를 확인해 주세요."); 
+    location.href="/user/login";
+    </script>`);
+  }
+  /*
+  isLogged
+    .then((result) => {
+      console.log("result===", result);
+      //if (result.length > 0) {
+      res.render("./index", { user: result.name });
+      //}
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    */
+});
+
 router.get("/list", (req, res) => {
   res.render("./user/list");
 });
