@@ -4,6 +4,7 @@ const path = require("path");
 const db = require("./db/db");
 app.set("port", process.env.PORT || 8081);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "/public")));
 const PORT = app.get("port");
 //app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs"); // ejs는 html에 data를 쉽게 쓰기 위해 사용.....
