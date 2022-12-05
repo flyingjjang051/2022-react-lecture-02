@@ -29,5 +29,5 @@ const UserSchema = mongoose.Schema({
 });
 
 //module.exports = mongoose.model("User", UserSchema);
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema); // users는 컬렉션이 생성된다.
 module.exports = User;

@@ -11,7 +11,7 @@ router.get("/join", (req, res) => {
 // 연결을 한다.
 // 밀어넣기
 // 결과받기
-router.post("/join", (req, res) => {
+router.post("/join", async (req, res) => {
   // post는 클라이언트에서 넘어오는 데이터 받아서 처리하고 그결과를 리턴해주는 곳이다.
   const id = req.body.id;
   const password = req.body.password;
@@ -30,6 +30,8 @@ router.post("/join", (req, res) => {
     address: address,
   });
   //console.log(insertUser.save());
+  // inserUser.save()는 Pormise를 리턴한다. async/await
+  /*
   insertUser
     .save()
     .then(() => {
@@ -42,7 +44,17 @@ router.post("/join", (req, res) => {
                 location.href="/user/join";
                 </script>`);
     });
-  //res.send("잘 처리되었습니다.");
+    */
+  try {
+    const result = await insertUser.save();
+    console.log(result);
+    res.redirect("/");
+  } catch {
+    res.send(`<script>
+                alert("알 수 없는 오류로 회원가입이 되지 않았습니다."); 
+                location.href="/user/join";
+                </script>`);
+  }
 });
 
 router.get("/list", (req, res) => {
