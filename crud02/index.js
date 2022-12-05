@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const db = require("./db/db");
 app.set("port", process.env.PORT || 8081);
 app.use(express.urlencoded({ extended: true }));
 const PORT = app.get("port");
