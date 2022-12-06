@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userSchema = require("../models/UserSchema");
-const session = require("express-session");
+const session = require("express-session"); // 서버에 저장
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 router.use(session({ secret: "비밀코드jjang051", resave: true, saveUninitialized: false }));
@@ -20,12 +20,14 @@ passport.use(
       try {
         const userInfo = await userSchema.findOne({ id: id, password: password }).exec();
         if (userInfo) {
-          console.log("로그인 성공", userInfo);
-
           return done(null, userInfo);
+          // done(첫번째 매개변수,두번째 매개변수)
+          // 첫번째 매개변수(서버 에러,성공했을때 변수)
         } else {
           console.log("로그인 실패");
           return done(null, false, { message: "아이디 또는 패스워드를 확인해 주세요." });
+          // done(첫번째 매개변수,두번째 매개변수)
+          // 첫번째 매개변수(서버 에러,성공했을때 변수,서버개발자가 임의로 실패를 전달할때...)
         }
       } catch {
         return done(null, false, { message: "아이디 또는 패스워드를 확인해 주세요." });
@@ -52,7 +54,13 @@ passport.deserializeUser((id, done) => {
 });
 
 router.get("/join", (req, res) => {
-  res.render("./user/join");
+  //req.user는 세션에 저장되어 있음....
+  //console.log("join===", req.user);
+  if (req.user) {
+    res.send(`<script>alert("로그인 되어 있습니다.");location.href="/";</script>`);
+  } else {
+    res.render("./user/join", { userInfo: req.user });
+  }
 });
 
 router.post("/join", async (req, res) => {
@@ -102,12 +110,20 @@ router.post("/join", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("./user/login");
+  if (req.user) {
+    res.send(`<script>alert("로그인 되어 있습니다.");location.href="/";</script>`);
+  } else {
+    res.render("./user/login", { userInfo: req.user });
+  }
 });
 
 router.get("/info", isNotLogged, (req, res) => {
   //console.log(req);
-  res.render("./user/info", { userInfo: req.user });
+  if (req.user) {
+    res.render("./user/info", { userInfo: req.user });
+  } else {
+    res.send(`<script>alert("로그인 먼저 하셔야 합니다.");location.href="/user/login";</script>`);
+  }
 });
 
 // async / await
