@@ -9,6 +9,8 @@ const PORT = app.get("port");
 //app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs"); // ejs는 html에 data를 쉽게 쓰기 위해 사용.....
 
+// sesssion (서버에 저장)  vs   cookie (클라이언트에 저장)
+
 // router 정의
 const userRouter = require("./routes/user");
 app.use("/user", userRouter);
