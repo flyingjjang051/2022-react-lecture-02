@@ -20,8 +20,11 @@ passport.use(
       try {
         const userInfo = await userSchema.findOne({ id: id, password: password }).exec();
         if (userInfo) {
-          return done(null, result);
+          console.log("로그인 성공", userInfo);
+
+          return done(null, userInfo);
         } else {
+          console.log("로그인 실패");
           return done(null, false, { message: "아이디 또는 패스워드를 확인해 주세요." });
         }
       } catch {
@@ -31,10 +34,13 @@ passport.use(
   )
 );
 passport.serializeUser((user, done) => {
+  console.log("🚀 ~ file: user.js:34 ~ passport.serializeUser ~ user", user);
+
   done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
   userSchema.findOne({ id: id }, (err, result) => {
+    console.log("🚀 ~ file: user.js:40 ~ userSchema.findOne ~ result", result);
     done(null, result);
   });
 });
@@ -92,13 +98,10 @@ router.post("/join", async (req, res) => {
 router.get("/login", (req, res) => {
   res.render("./user/login");
 });
-router.get("/info", async (req, res) => {
-  const id = req.query.id;
-  //console.log("🚀 ~ file: user.js:65 ~ router.get ~ id", id);
-  try {
-    const userInfo = await userSchema.findOne({ id: id });
-    res.render("./user/info", { userInfo: userInfo });
-  } catch {}
+
+router.get("/info", isLogged, async (req, res) => {
+  console.log(req);
+  res.render("./user/info", { userInfo: req.user });
 });
 
 // async / await
@@ -118,13 +121,21 @@ router.post("/login", async (req, res) => {
 });
 */
 
-router.post("/login", passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/" }), (req, res) => {});
+// passport로 로그인을 하면 자동으로 req.user 정보가 생긴다.
+router.post("/login", passport.authenticate("local", { successRedirect: "/user/info", failureRedirect: "/user/login" }), (req, res) => {});
 
-router.get("/list", (req, res) => {
+router.get("/list", isLogged, (req, res) => {
   res.render("./user/list");
 });
-
+router.get("/logout", (req, res) => {
+  if (req.user) {
+    req.session.destroy();
+    res.redirect("/");
+  }
+});
+// 미들웨어
 function isLogged(req, res, next) {
+  // passport에서 로그인 성공을 하면 자동으로 req.user를 생성한다.
   if (req.user) {
     next();
   } else {

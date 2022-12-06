@@ -16,7 +16,8 @@ const userRouter = require("./routes/user");
 app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
-  res.render("./index", { user: "" });
+  //console.log(req.user);
+  res.render("./index");
 });
 
 app.listen(PORT, () => {
