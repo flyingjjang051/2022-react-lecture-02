@@ -34,15 +34,21 @@ passport.use(
   )
 );
 passport.serializeUser((user, done) => {
+  console.log("여기는 로그인 할때 한번만 거쳐간다.");
   console.log("🚀 ~ file: user.js:34 ~ passport.serializeUser ~ user", user);
 
   done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
-  userSchema.findOne({ id: id }, (err, result) => {
-    console.log("🚀 ~ file: user.js:40 ~ userSchema.findOne ~ result", result);
-    done(null, result);
-  });
+  console.log("여기는 매번 거쳐간다.");
+  userSchema
+    .findOne({ id: id })
+    .then((result) => {
+      done(null, result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 router.get("/join", (req, res) => {
@@ -85,7 +91,7 @@ router.post("/join", async (req, res) => {
     */
   try {
     const result = await insertUser.save();
-    console.log(result);
+    //console.log(result);
     res.redirect("/");
   } catch {
     res.send(`<script>
@@ -99,8 +105,8 @@ router.get("/login", (req, res) => {
   res.render("./user/login");
 });
 
-router.get("/info", isLogged, async (req, res) => {
-  console.log(req);
+router.get("/info", isNotLogged, (req, res) => {
+  //console.log(req);
   res.render("./user/info", { userInfo: req.user });
 });
 
@@ -124,7 +130,7 @@ router.post("/login", async (req, res) => {
 // passport로 로그인을 하면 자동으로 req.user 정보가 생긴다.
 router.post("/login", passport.authenticate("local", { successRedirect: "/user/info", failureRedirect: "/user/login" }), (req, res) => {});
 
-router.get("/list", isLogged, (req, res) => {
+router.get("/list", (req, res) => {
   res.render("./user/list");
 });
 router.get("/logout", (req, res) => {
@@ -135,7 +141,13 @@ router.get("/logout", (req, res) => {
 });
 // 미들웨어
 function isLogged(req, res, next) {
-  // passport에서 로그인 성공을 하면 자동으로 req.user를 생성한다.
+  if (req.user) {
+    next();
+  } else {
+    res.send(`<script>alert("로그인되어 있습니다."); location.href="/";</script>`);
+  }
+}
+function isNotLogged(req, res, next) {
   if (req.user) {
     next();
   } else {
