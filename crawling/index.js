@@ -63,10 +63,10 @@ app.get("/daum/movie", async (req, res) => {
       link: $(item).find(".poster_info a").attr("src"),
       info: {
         openDate: $(item).find(".poster_info a .list_info:nth-child(1) dd").text(),
-        genre: $(item).find(".poster_info a .list_info:nth-child(2) dd").text().replaceAll("\n","").replace(/\s/g, ""),
-        grade: $(item).find(".poster_info a .list_info:nth-child(3) dd").text().replaceAll("\n","").replace(/\s/g, ""),
-        director: $(item).find(".poster_info a .list_info:nth-child(4) dd").text().replaceAll("\n","").replace(/\s/g, ""),
-        mainRole: $(item).find(".poster_info a .list_info:nth-child(5) dd").text().replaceAll("\n","").replace(/\s/g, ""),
+        genre: $(item).find(".poster_info a .list_info:nth-child(2) dd").text().replace(/[\n\s]/g, ""),
+        grade: $(item).find(".poster_info a .list_info:nth-child(3) dd").text().replace(/[\n\s]/g, ""),
+        director: $(item).find(".poster_info a .list_info:nth-child(4) dd").text().replace(/[\n\s]/g, ""),
+        mainRole: $(item).find(".poster_info a .list_info:nth-child(5) dd").text().replace(/[\n]/g, ""),
       }
     });
   });
