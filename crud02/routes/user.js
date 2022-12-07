@@ -157,18 +157,21 @@ router.get("/logout", (req, res) => {
 });
 // 미들웨어
 function isLogged(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.send(`<script>alert("로그인되어 있습니다."); location.href="/";</script>`);
-  }
+  console.log(req.isAuthenticated());
+
+  // if (req.user) {
+  //   next();
+  // } else {
+  //   res.send(`<script>alert("로그인되어 있습니다."); location.href="/";</script>`);
+  // }
 }
 function isNotLogged(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.send(`<script>alert("로그인 먼저 하셔야 합니다."); location.href="/user/login";</script>`);
-  }
+  console.log(req.isAuthenticated());
+  // if (req.user) {
+  //   next();
+  // } else {
+  //   res.send(`<script>alert("로그인 먼저 하셔야 합니다."); location.href="/user/login";</script>`);
+  // }
 }
 
 module.exports = router;

@@ -14,14 +14,18 @@ const gnb = "gnb01";
 const memberList = [];
 let memberNo = 0;
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: "frontend-2022", //dbName으로 설정하면 된다.
+});
 const db = mongoose.connection;
 db.once("open", () => {
   console.log("db연결 성공");
 });
 
 //
-const members = mongoose.Schema({
+const members = new mongoose.Schema({
   no: "number",
   id: "string",
   password: "string",
@@ -31,7 +35,25 @@ const members = mongoose.Schema({
   date: "date",
 });
 
-const Members = mongoose.model("Schema", members);
+const Members = mongoose.model("member", members);
+
+const newMembers = new Members({
+  no: 2,
+  id: "jjang052",
+  password: "1234",
+  name: "쨩난다",
+  phone: "010-2582-2242",
+  address: "지구 어디즘....",
+  date: new Date(),
+});
+newMembers.save((err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("멤버 추가 성공");
+    //res.redirect("/member/list");
+  }
+});
 
 router.get("/join", (req, res) => {
   res.render("./member/join", { subTitle: subTitle, contentsTitle: "회원가입", className: "member", subVisualNo: subVisualNo, gnb: gnb });

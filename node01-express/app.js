@@ -4,7 +4,8 @@ const path = require("path");
 const app = express();
 // middle ware
 app.use(express.static(path.join(__dirname, "/public")));
-console.log(__dirname);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
@@ -91,6 +92,28 @@ app.get("/papago/:words", (req, res) => {
       res.json(response);
     });
 });
+app.post("/papago02", (req, res) => {
+  console.log(req.body.txt);
+  fetch("https://openapi.naver.com/v1/papago/n2mt", {
+    method: "POST",
+    headers: {
+      "X-Naver-Client-Id": "EWAmQ4Hbg6givPZnU5vq",
+      "X-Naver-Client-Secret": "lH56uhLQVV",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    },
+    body: new URLSearchParams({
+      target: "en",
+      source: "ko",
+      text: req.body.txt,
+    }),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+      res.json(response);
+    });
+});
+
 app.get("/trans", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/trans.html"));
 });
