@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
   // res.render();
   // res.json();
 });
+
+//ssr csr
 app.get("/daum/news", (req, res) => {
   // 여기서 다음 뉴스에 가서 내용을 긁어오기
   // json으로 가공해서 내려보내주기
@@ -39,7 +41,7 @@ app.get("/daum/news", (req, res) => {
 app.get("/daum/movie", async (req, res) => {
   // 크로미니움 (크롬의 개발 버전)
   const browser = await puppeteer.launch({
-    headless: false,
+    //headless: false,
   });
   const page = await browser.newPage();
   await page.setViewport({
@@ -47,18 +49,33 @@ app.get("/daum/movie", async (req, res) => {
     height: 800,
   });
   await page.goto("https://movie.daum.net/main");
-
   await page.waitForSelector(".list_reserveranking");
   const content = await page.content("https://movie.daum.net/main");
   //console.log(content);
   const $ = cheerio.load(content);
-  const list_reserveranking = $(".list_reserveranking");
+  const list_reserveranking = $(".topmovie-slide .list_reserveranking").children("li");
   const list = [];
+  //prettier-ignore
   list_reserveranking.each((idx, item) => {
-    list.push({ img: $(item).find(".poster_movie img").attr("src") });
+    list.push({ 
+      img: $(item).find(".poster_movie img").attr("src"), 
+      title: $(item).find(".thumb_cont a").text(), 
+      link: $(item).find(".poster_info a").attr("src"),
+      info: {
+        openDate: $(item).find(".poster_info a .list_info:nth-child(1) dd").text(),
+        genre: $(item).find(".poster_info a .list_info:nth-child(2) dd").text().replaceAll("\n","").replace(/\s/g, ""),
+        grade: $(item).find(".poster_info a .list_info:nth-child(3) dd").text().replaceAll("\n","").replace(/\s/g, ""),
+        director: $(item).find(".poster_info a .list_info:nth-child(4) dd").text().replaceAll("\n","").replace(/\s/g, ""),
+        mainRole: $(item).find(".poster_info a .list_info:nth-child(5) dd").text().replaceAll("\n","").replace(/\s/g, ""),
+      }
+    });
   });
   res.json(list);
 });
+//정규표현식 regular expression  (글자에서 맞는 패턴 찾기)
+const txt = "  장    성   호  ";
+console.log(txt.replace(/\s/g, ""));
+
 app.listen(PORT, () => {
   console.log(`${PORT}에서 서버 대기중`);
 });
