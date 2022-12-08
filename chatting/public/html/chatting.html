@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chatting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <header id="header">GGAGGO TALK</header>
+    <div class="contents">
+      <div class="user">
+        <label><span>대화명</span><input type="text" id="name" placeholder="대화명을 입력해주세요." /></label>
+      </div>
+      <div class="msg-box">
+        <ul class="msg-list">
+          <li class="other">
+            <div class="profile">
+              <img src="../images/man.png" alt="" />
+            </div>
+            <div class="msg-item">
+              <span class="name">장성호</span>
+              <div class="inner">
+                <div class="msg">안녕하세요.</div>
+                <div class="time">오전 11:30:24</div>
+              </div>
+            </div>
+          </li>
+          <li class="me">
+            <div class="profile">
+              <img src="../images/man.png" alt="" />
+            </div>
+            <div class="msg-item">
+              <span class="name">장성호</span>
+              <div class="inner">
+                <div class="msg">안녕하세요.</div>
+                <div class="time">오전 11:30:24</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="send-box">
+        <textarea name="" cols="30" rows="10" id="msg"></textarea>
+        <button class="btn btn-send">전송</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    const socket = io();
+    // 클라이언트가 메세지 보낼때 쓰는 메서드 emit()
+    const btnSend = document.querySelector(".btn-send");
+    const msg = document.querySelector("#msg");
+    const name = document.querySelector("#name");
+    const msgList = document.querySelector(".msg-list");
+    btnSend.addEventListener("click", () => {
+      socket.emit("yaho", { name: name.value, msg: msg.value });
+    });
+    socket.on("serverYaho", (serverData) => {
+      console.log(serverData.name, "===", serverData.msg);
+      const li = document.createElement("li");
+      li.classList.add("me");
+      li.innerHTML = `<div>${serverData.name}</div><div>${serverData.msg}</div>`;
+      msgList.appendChild(li);
+    });
+  </script>
+</html>
