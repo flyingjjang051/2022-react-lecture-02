@@ -68,17 +68,33 @@
     btnEnter.addEventListener("click", () => {
       socket.emit("enter", { name: name.value, gender: "male", age: 20 });
     });
+    // 13이면서 길이가 0보다는 커야한다.
+    // shift가 눌러져 있으면 날아자기 않는다.
+    msg.addEventListener("keydown", (e) => {
+      if (e.keyCode === 13) {
+        if (msg.value.trim().length <= 0) {
+          e.preventDefault();
+        }
+      }
+    });
     msg.addEventListener("keyup", (e) => {
-      //console.log(e);
-      if (msg.value.length > 0) {
-        btnSend.classList.add("on");
-        if (e.keyCode === 13 && !e.shiftKey) {
-          //socket.emit("yaho", { name: name.value, msg: msg.value.trim().replaceAll("\n", "<br>") });
-          socket.emit("yaho", { name: name.value, msg: msg.value.trim().replace(/\n/g, "<br>") });
-          console.log(msg.value);
+      //console.log(msg.value.trim().length);
+
+      if (e.keyCode === 13) {
+        if (e.shiftKey) {
+          return;
+        }
+        if (msg.value.trim().length <= 0) {
           msg.value = "";
           msg.focus();
+          return;
         }
+        socket.emit("yaho", { name: name.value, msg: msg.value.trim().replace(/\n/g, "<br>") });
+        msg.value = "";
+        msg.focus();
+      }
+      if (msg.value.trim().length > 0) {
+        btnSend.classList.add("on");
       } else {
         btnSend.classList.remove("on");
       }
