@@ -33,16 +33,27 @@ button {
   font-weight: 700;
 }
 
-.contents .user label {
+.contents .user {
+  display: flex;
   padding: 10px;
   background-color: #999;
+}
+.contents .user .btn-enter {
+  padding: 0 20px;
+  background-color: rgb(255, 226, 94);
+  border-radius: 5px;
+  color: #111;
+  margin-left: 10px;
+}
+.contents .user label {
   display: flex;
+  flex-grow: 1;
 }
 .contents .user label span {
   padding: 15px 20px;
   background-color: #111;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +61,7 @@ button {
 }
 .contents .user label input {
   flex-grow: 1;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 10px;
   border: none;
   outline: none;
@@ -71,6 +82,7 @@ button {
   overflow: hidden;
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
 }
 .contents .msg-box .msg-list li .profile img {
   width: 100%;
@@ -85,6 +97,7 @@ button {
   background-color: #fff;
   border-radius: 5px;
   margin: 10px 0;
+  line-height: 1.5;
 }
 .contents .msg-box .msg-list li .msg-item .time {
   font-size: 12px;
@@ -96,8 +109,25 @@ button {
   margin-right: 10px;
   align-items: flex-end;
 }
+.contents .msg-box .msg-list .me .msg-item .msg {
+  margin-top: 5px;
+}
 .contents .msg-box .msg-list .me .msg-item .name {
   display: none;
+}
+.contents .msg-box .msg-list .enter {
+  padding: 10px 30px;
+  font-size: 14px;
+  justify-content: center;
+}
+.contents .msg-box .msg-list .enter .name {
+  border-radius: 50px;
+  background-color: rgb(14, 166, 226);
+  border: 1px solid #085f82;
+  text-align: center;
+  color: #fff;
+  padding: 10px 30px;
+  box-sizing: border-box;
 }
 .contents .send-box {
   height: 200px;
@@ -106,13 +136,14 @@ button {
 .contents .send-box textarea {
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 20px 80px 20px 20px;
   border: none;
   outline: none;
   background-color: #fff;
   line-height: 1.5;
   font-family: inherit;
   font-size: 16px;
+  box-sizing: border-box;
 }
 .contents .send-box .btn {
   position: absolute;

@@ -17,6 +17,7 @@
     <div class="contents">
       <div class="user">
         <label><span>대화명</span><input type="text" id="name" placeholder="대화명을 입력해주세요." /></label>
+        <button class="btn-enter">입장</button>
       </div>
       <div class="msg-box">
         <ul class="msg-list">
@@ -50,7 +51,7 @@
       </div>
       <div class="send-box">
         <textarea name="" cols="30" rows="10" id="msg"></textarea>
-        <button class="btn btn-send on">전송</button>
+        <button class="btn btn-send">전송</button>
       </div>
     </div>
   </body>
@@ -61,18 +62,40 @@
     const msg = document.querySelector("#msg");
     const name = document.querySelector("#name");
     const msgList = document.querySelector(".msg-list");
+    const msgBox = document.querySelector(".msg-box");
+    const btnEnter = document.querySelector(".btn-enter");
+
+    btnEnter.addEventListener("click", () => {
+      socket.emit("enter", { name: name.value, gender: "male", age: 20 });
+    });
+    msg.addEventListener("keyup", (e) => {
+      //console.log(e);
+      if (msg.value.length > 0) {
+        btnSend.classList.add("on");
+        if (e.keyCode === 13 && !e.shiftKey) {
+          //socket.emit("yaho", { name: name.value, msg: msg.value.trim().replaceAll("\n", "<br>") });
+          socket.emit("yaho", { name: name.value, msg: msg.value.trim().replace(/\n/g, "<br>") });
+          console.log(msg.value);
+          msg.value = "";
+          msg.focus();
+        }
+      } else {
+        btnSend.classList.remove("on");
+      }
+    });
+
     btnSend.addEventListener("click", () => {
       socket.emit("yaho", { name: name.value, msg: msg.value });
+      msg.value = "";
+      msg.focus();
     });
+    // btnEnter.addEventListener("click", () => {
+    //   socket.emit("clientEnter", { name: name.value });
+    // });
+
     socket.on("serverYaho", (serverData) => {
       console.log(serverData.name, "===", serverData.msg);
       const li = document.createElement("li");
-      // let className = "";
-      // if (name === serverData.name) {
-      //   className = "me";
-      // } else {
-      //   className = "other";
-      // }
       const className = name.value === serverData.name ? "me" : "other";
       li.classList.add(className);
       li.innerHTML = `
@@ -88,6 +111,29 @@
             </div>
           `;
       msgList.appendChild(li);
+      console.log(msgList.offsetHeight);
+      msgBox.scrollTo(0, msgList.offsetHeight);
     });
+    socket.on("serverEnter", (serverData) => {
+      const li = document.createElement("li");
+      li.classList.add("enter");
+      li.innerHTML = `<div class="name">${serverData.name}님 등장!! 두둥탁~~</div>`;
+      msgList.appendChild(li);
+      msgBox.scrollTo(0, msgList.offsetHeight);
+    });
+
+    // socket.on("serverEnter", (serverData) => {
+    //   const li = document.createElement("li");
+    //   const className = "enter";
+    //   li.classList.add(className);
+    //   li.innerHTML = `
+    //         <div class="name">
+    //           ${serverData.name}님 입장 두둥탁!!
+    //         </div>
+    //       `;
+    //   msgList.appendChild(li);
+    //   console.log(msgList.offsetHeight);
+    //   msgBox.scrollTo(0, msgList.offsetHeight);
+    // });
   </script>
 </html>

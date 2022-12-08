@@ -32,15 +32,24 @@ button {
 }
 .contents {
   .user {
+    display: flex;
+    padding: 10px;
+    background-color: #999;
+    .btn-enter {
+      padding: 0 20px;
+      background-color: rgb(255, 226, 94);
+      border-radius: 5px;
+      color: #111;
+      margin-left: 10px;
+    }
     label {
-      padding: 10px;
-      background-color: #999;
       display: flex;
+      flex-grow: 1;
       span {
         padding: 15px 20px;
         background-color: #111;
         color: #fff;
-        border-radius: 10px;
+        border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -48,7 +57,7 @@ button {
       }
       input {
         flex-grow: 1;
-        border-radius: 10px;
+        border-radius: 5px;
         padding: 10px;
         border: none;
         outline: none;
@@ -70,6 +79,7 @@ button {
           overflow: hidden;
           width: 48px;
           height: 48px;
+          flex-shrink: 0;
           img {
             width: 100%;
           }
@@ -83,6 +93,7 @@ button {
             background-color: #fff;
             border-radius: 5px;
             margin: 10px 0;
+            line-height: 1.5;
           }
           .time {
             font-size: 12px;
@@ -95,9 +106,27 @@ button {
         .msg-item {
           margin-right: 10px;
           align-items: flex-end;
+          .msg {
+            margin-top: 5px;
+          }
           .name {
             display: none;
           }
+        }
+      }
+      .enter {
+        padding: 10px 30px;
+        font-size: 14px;
+        justify-content: center;
+        .name {
+          $color: rgb(14, 166, 226);
+          border-radius: 50px;
+          background-color: $color;
+          border: 1px solid darken($color, 20);
+          text-align: center;
+          color: #fff;
+          padding: 10px 30px;
+          box-sizing: border-box;
         }
       }
     }
@@ -108,13 +137,14 @@ button {
     textarea {
       width: 100%;
       height: 100%;
-      padding: 20px;
+      padding: 20px 80px 20px 20px;
       border: none;
       outline: none;
       background-color: #fff;
       line-height: 1.5;
       font-family: inherit;
       font-size: 16px;
+      box-sizing: border-box;
     }
     .btn {
       position: absolute;

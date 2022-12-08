@@ -15,9 +15,18 @@ const PORT = app.get("port");
 io.on("connection", (socket) => {
   console.log("클라이언트 연결되었습니다.");
   socket.on("yaho", (clientData) => {
-    //console.log(clientData.name, "===", clientData.msg);
     io.emit("serverYaho", { name: clientData.name, msg: clientData.msg, time: moment(Date.now()).format("A hh:mm") });
   });
+  socket.on("enter", (clientData) => {
+    const { name, gender, age } = clientData;
+    //io.emit("serverEnter", { name: name });
+    io.emit("serverEnter", { name: clientData.name });
+  });
+
+  // socket.on("clientEnter", (clientData) => {
+  //   //console.log(clientData.name, "===", clientData.msg);
+  //   io.emit("serverEnter", { name: clientData.name });
+  // });
 });
 app.get("/chatting", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/html/chatting.html"));
