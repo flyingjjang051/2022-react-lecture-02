@@ -58,6 +58,7 @@ button {
 .contents .msg-box {
   background-color: #b2c7d9;
   height: 500px;
+  overflow-y: auto;
 }
 .contents .msg-box .msg-list li {
   display: flex;
@@ -95,6 +96,9 @@ button {
   margin-right: 10px;
   align-items: flex-end;
 }
+.contents .msg-box .msg-list .me .msg-item .name {
+  display: none;
+}
 .contents .send-box {
   height: 200px;
   position: relative;
@@ -118,4 +122,10 @@ button {
   color: #999;
   right: 10px;
   top: 10px;
+  pointer-events: none;
+}
+.contents .send-box .btn.on {
+  pointer-events: auto;
+  background-color: rgb(255, 226, 94);
+  color: #111;
 }

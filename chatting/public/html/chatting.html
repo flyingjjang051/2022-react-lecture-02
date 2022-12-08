@@ -20,6 +20,7 @@
       </div>
       <div class="msg-box">
         <ul class="msg-list">
+          <!--
           <li class="other">
             <div class="profile">
               <img src="../images/man.png" alt="" />
@@ -44,11 +45,12 @@
               </div>
             </div>
           </li>
+          -->
         </ul>
       </div>
       <div class="send-box">
         <textarea name="" cols="30" rows="10" id="msg"></textarea>
-        <button class="btn btn-send">전송</button>
+        <button class="btn btn-send on">전송</button>
       </div>
     </div>
   </body>
@@ -65,8 +67,26 @@
     socket.on("serverYaho", (serverData) => {
       console.log(serverData.name, "===", serverData.msg);
       const li = document.createElement("li");
-      li.classList.add("me");
-      li.innerHTML = `<div>${serverData.name}</div><div>${serverData.msg}</div>`;
+      // let className = "";
+      // if (name === serverData.name) {
+      //   className = "me";
+      // } else {
+      //   className = "other";
+      // }
+      const className = name.value === serverData.name ? "me" : "other";
+      li.classList.add(className);
+      li.innerHTML = `
+            <div class="profile">
+              <img src="../images/man.png" alt="" />
+            </div>
+            <div class="msg-item">
+              <span class="name">${serverData.name}</span>
+              <div class="inner">
+                <div class="msg">${serverData.msg}</div>
+                <div class="time">${serverData.time}</div>
+              </div>
+            </div>
+          `;
       msgList.appendChild(li);
     });
   </script>

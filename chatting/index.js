@@ -1,5 +1,6 @@
 const path = require("path");
 const http = require("http");
+const moment = require("moment");
 const socketIO = require("socket.io");
 const express = require("express");
 const app = express(); // 웹서버 만들때
@@ -10,11 +11,12 @@ app.use(express.static(path.join(__dirname, "/public")));
 const PORT = app.get("port");
 
 // client에서 접속 대기중
+//console.log(moment(Date.now()).format("A hh:mm"));
 io.on("connection", (socket) => {
   console.log("클라이언트 연결되었습니다.");
   socket.on("yaho", (clientData) => {
     //console.log(clientData.name, "===", clientData.msg);
-    io.emit("serverYaho", { name: clientData.name, msg: clientData.msg });
+    io.emit("serverYaho", { name: clientData.name, msg: clientData.msg, time: moment(Date.now()).format("A hh:mm") });
   });
 });
 app.get("/chatting", (req, res) => {

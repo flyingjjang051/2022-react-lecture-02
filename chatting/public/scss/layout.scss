@@ -58,6 +58,7 @@ button {
   .msg-box {
     background-color: #b2c7d9;
     height: 500px;
+    overflow-y: auto;
     .msg-list {
       li {
         display: flex;
@@ -90,9 +91,13 @@ button {
       }
       .me {
         flex-direction: row-reverse;
+
         .msg-item {
           margin-right: 10px;
           align-items: flex-end;
+          .name {
+            display: none;
+          }
         }
       }
     }
@@ -119,6 +124,12 @@ button {
       color: #999;
       right: 10px;
       top: 10px;
+      pointer-events: none;
+      &.on {
+        pointer-events: auto;
+        background-color: rgb(255, 226, 94);
+        color: #111;
+      }
     }
   }
 }
