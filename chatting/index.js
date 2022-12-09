@@ -13,7 +13,7 @@ const PORT = app.get("port");
 // client에서 접속 대기중
 //console.log(moment(Date.now()).format("A hh:mm"));
 io.on("connection", (socket) => {
-  console.log("클라이언트 연결되었습니다.");
+  console.log(socket);
   socket.on("yaho", (clientData) => {
     io.emit("serverYaho", { name: clientData.name, msg: clientData.msg, time: moment(Date.now()).format("A hh:mm") });
   });
@@ -23,10 +23,11 @@ io.on("connection", (socket) => {
     io.emit("serverEnter", { name: clientData.name });
   });
 
-  // socket.on("clientEnter", (clientData) => {
-  //   //console.log(clientData.name, "===", clientData.msg);
-  //   io.emit("serverEnter", { name: clientData.name });
-  // });
+  socket.on("disconnect", (clientData) => {
+    console.log("나갔음");
+    const { name, gender, age } = clientData;
+    io.emit("serverEnter", { name: clientData.name });
+  });
 });
 app.get("/chatting", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/html/chatting.html"));
