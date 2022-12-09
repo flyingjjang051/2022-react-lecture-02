@@ -1,3 +1,6 @@
+const db = require("./db/db");
+const movieSchema = require("./models/MovieSchema");
+const cloudinary = require("cloudinary");
 const path = require("path");
 const multer = require("multer");
 const express = require("express");
@@ -5,8 +8,15 @@ const app = express();
 app.set("port", process.env.PORT || 8081);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
+app.use("/upload", express.static(path.join(__dirname, "/upload")));
 app.set("view engine", "ejs");
 const PORT = app.get("port");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  cloud_name: process.env.CLOUDINARY_API_SECRET,
+});
 
 // multer 세팅
 const diskStorage = multer.diskStorage({
@@ -32,17 +42,46 @@ app.get("/insert", (req, res) => {
 app.post("/insert", fileUpload.single("poster"), (req, res) => {
   const title = req.body.title;
   const date = req.body.date;
-  const genre = req.body.genre;
+  //["호러","액션"]== 호러/액션
+  const genre = Array.isArray(req.body.genre) ? req.body.genre.join("/") : req.body.genre;
   const summary = req.body.summary;
-  const point = req.body.point;
+  const point = Number(req.body.point);
   //const poster = req.body.poster;
-  const poster = req.file;
-  console.log(title);
-  console.log(date);
-  console.log(genre);
-  console.log(summary);
-  console.log(point);
-  console.log(poster);
+  const poster = req.file.path;
+  //db에 넣기
+
+  const insertMovie = new movieSchema({
+    title: title,
+    date: date,
+    genre: genre,
+    summary: summary,
+    point: point,
+    poster: poster,
+  });
+  cloudinary.uploader.upload(req.file.path, (result) => {
+    insertMovie
+      .save()
+      .then((result) => {
+        console.log(result);
+        res.send("파일이 잘 저장되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+});
+
+app.get("/list", (req, res) => {
+  // db에서 읽어서 뿌리기...
+  movieSchema
+    .find()
+    .then((result) => {
+      console.log(result);
+      res.render("list", { movieList: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.listen(PORT, () => {
