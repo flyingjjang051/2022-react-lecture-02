@@ -1,21 +1,25 @@
 const db = require("./db/db");
 const movieSchema = require("./models/MovieSchema");
 const cloudinary = require("cloudinary");
+const dotenv = require("dotenv").config();
+const cors = require("cors");
+
 const path = require("path");
 const multer = require("multer");
 const express = require("express");
 const app = express();
 app.set("port", process.env.PORT || 8081);
+app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
-app.use("/upload", express.static(path.join(__dirname, "/upload")));
-app.set("view engine", "ejs");
+app.use("/upload", express.static(path.join(__dirname, "upload")));
+app.use(cors());
 const PORT = app.get("port");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  cloud_name: process.env.CLOUDINARY_API_SECRET,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // multer 세팅
@@ -42,23 +46,23 @@ app.get("/insert", (req, res) => {
 app.post("/insert", fileUpload.single("poster"), (req, res) => {
   const title = req.body.title;
   const date = req.body.date;
-  //["호러","액션"]== 호러/액션
   const genre = Array.isArray(req.body.genre) ? req.body.genre.join("/") : req.body.genre;
   const summary = req.body.summary;
   const point = Number(req.body.point);
   //const poster = req.body.poster;
-  const poster = req.file.path;
+  //const poster = req.file.path;
   //db에 넣기
 
-  const insertMovie = new movieSchema({
-    title: title,
-    date: date,
-    genre: genre,
-    summary: summary,
-    point: point,
-    poster: poster,
-  });
   cloudinary.uploader.upload(req.file.path, (result) => {
+    console.log(result);
+    const insertMovie = new movieSchema({
+      title: title,
+      date: date,
+      genre: genre,
+      summary: summary,
+      point: point,
+      poster: result.url,
+    });
     insertMovie
       .save()
       .then((result) => {
@@ -71,13 +75,14 @@ app.post("/insert", fileUpload.single("poster"), (req, res) => {
   });
 });
 
-app.get("/list", (req, res) => {
+app.get("/movie/list", (req, res) => {
   // db에서 읽어서 뿌리기...
   movieSchema
     .find()
     .then((result) => {
       console.log(result);
-      res.render("list", { movieList: result });
+      //res.render("list", { movieList: result });
+      res.json(result);
     })
     .catch((err) => {
       console.log(err);
