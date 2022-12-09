@@ -1,5 +1,6 @@
 const db = require("./db/db");
 const movieSchema = require("./models/MovieSchema");
+const portfolioSchema = require("./models/PortfolioSchema");
 const cloudinary = require("cloudinary");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
@@ -24,9 +25,9 @@ cloudinary.config({
 
 // multer 세팅
 const diskStorage = multer.diskStorage({
-  destination: (req, file, done) => {
-    done(null, path.join(__dirname, "/upload"));
-  },
+  // destination: (req, file, done) => {
+  //   done(null, path.join(__dirname, "/upload"));
+  // },
   filename: (req, file, done) => {
     //done(null, file.originalname + "-" + Date.now());
     done(null, file.originalname.split(".")[0] + "-" + Date.now() + path.extname(file.originalname));
@@ -41,6 +42,9 @@ app.get("/", (req, res) => {
 });
 app.get("/insert", (req, res) => {
   res.render("insert");
+});
+app.get("/portfolio/insert", (req, res) => {
+  res.render("pinterest");
 });
 
 app.post("/insert", fileUpload.single("poster"), (req, res) => {
@@ -75,6 +79,29 @@ app.post("/insert", fileUpload.single("poster"), (req, res) => {
   });
 });
 
+app.post("/portfolio/insert", fileUpload.single("poster"), (req, res) => {
+  const title = req.body.title;
+  const category = Array.isArray(req.body.category) ? req.body.category.join("/") : req.body.category;
+  const summary = req.body.summary;
+  cloudinary.uploader.upload(req.file.path, (result) => {
+    const insertPortfolio = new portfolioSchema({
+      title: title,
+      category: category,
+      summary: summary,
+      poster: result.url,
+    });
+    insertPortfolio
+      .save()
+      .then((result) => {
+        console.log(result);
+        res.send("파일이 잘 저장되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+});
+
 app.get("/movie/list", (req, res) => {
   // db에서 읽어서 뿌리기...
   movieSchema
@@ -82,6 +109,17 @@ app.get("/movie/list", (req, res) => {
     .then((result) => {
       console.log(result);
       //res.render("list", { movieList: result });
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+app.get("/portfolio/list", (req, res) => {
+  portfolioSchema
+    .find()
+    .then((result) => {
+      console.log(result);
       res.json(result);
     })
     .catch((err) => {

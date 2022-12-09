@@ -67,6 +67,29 @@
     <div class="cursor">
       <span class="txt"></span>
     </div>
-    <script></script>
+    <script>
+      const itemList = document.querySelector(".item-list");
+      fetch("http://127.0.0.1:8081/portfolio/list")
+        .then((response) => response.json())
+        .then((data) => {
+          //console.log(data);
+          data.forEach((item, idx) => {
+            const li = document.createElement("li");
+            const categorys = item.category.split("/"); // [photo,sketch]
+            console.log("🚀 ~ file: portfolio.html:79 ~ data.forEach ~ categorys", categorys);
+            li.classList.add(...categorys);
+            li.innerHTML = `<a href="">
+            <div class="inner">
+                <div class="img"><img src="${item.poster}" alt="" /></div>
+                <div class="info">
+                  <h2>${item.title}</h2>
+                  <p class="desc">${item.summary}</p>
+                </div>
+            </div>
+          </a>`;
+            itemList.appendChild(li);
+          });
+        });
+    </script>
   </body>
 </html>
