@@ -30,3 +30,22 @@ body {
 .header h1 {
   font-size: 16px;
 }
+
+.todo-insert {
+  display: flex;
+}
+.todo-insert input {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+  background-color: #ccc;
+  outline: none;
+}
+.todo-insert button {
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(0, 143, 199);
+  color: #fff;
+}
