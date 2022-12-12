@@ -45,3 +45,56 @@ body {
     color: #fff;
   }
 }
+.footer {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 30px;
+  p {
+    background-color: #000;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 30px;
+    border-radius: 100px;
+  }
+}
+
+.todo-list {
+  padding: 20px;
+  li .item {
+    display: flex;
+    position: relative;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+    align-items: center;
+    &.done {
+      p {
+        color: #999;
+        text-decoration: line-through;
+      }
+    }
+    p {
+      margin-left: 10px;
+    }
+    .btns {
+      display: flex;
+      margin-left: auto;
+      button {
+        border: none;
+        outline: none;
+        padding: 15px;
+        background-color: #111;
+        color: #fff;
+        margin-left: 5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

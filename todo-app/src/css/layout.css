@@ -49,3 +49,55 @@ body {
   background-color: rgb(0, 143, 199);
   color: #fff;
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 30px;
+}
+.footer p {
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 30px;
+  border-radius: 100px;
+}
+
+.todo-list {
+  padding: 20px;
+}
+.todo-list li .item {
+  display: flex;
+  position: relative;
+  padding: 10px 0;
+  border-bottom: 1px dotted #ccc;
+  align-items: center;
+}
+.todo-list li .item.done p {
+  color: #999;
+  text-decoration: line-through;
+}
+.todo-list li .item p {
+  margin-left: 10px;
+}
+.todo-list li .item .btns {
+  display: flex;
+  margin-left: auto;
+}
+.todo-list li .item .btns button {
+  border: none;
+  outline: none;
+  padding: 15px;
+  background-color: #111;
+  color: #fff;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
