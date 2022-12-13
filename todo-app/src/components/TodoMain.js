@@ -20,15 +20,56 @@ function TodoMain() {
     setTodoList([...todoList, { id: count, done: false, title: _title }]);
     localStorage.setItem("todoList", JSON.stringify([...todoList, { id: count, done: false, title: _title }]));
   };
-  let todoTxt = "";
+  function changeState() {
+    console.log("change");
+  }
+  const testObj = { name: "장성호", age: 20, weight: 80 };
+  //const { name, age, weight } = testObj;
+  const newObj = { ...testObj };
+  newObj.age = 40;
+  newObj.name = "장동건";
+  console.log(testObj === newObj);
+
+  const modifyTodoList = (id) => {
+    //map은 배열의 반복문 (iteration)
+    const newTodoList = todoList.map((item, idx) => {
+      if (item.id === id) {
+        item.done = !item.done; // true,false
+      }
+      return item;
+      //return item.id === id ? { ...item, done: true } : item;
+    });
+
+    setTodoList(newTodoList);
+    localStorage.setItem("todoList", JSON.stringify(newTodoList));
+  };
+
+  const deleteTodoList = (id) => {
+    const newTodoList = todoList.filter((item, idx) => {
+      return item.id !== id;
+    });
+    setTodoList(newTodoList);
+    localStorage.setItem("todoList", JSON.stringify(newTodoList));
+  };
+
+  // const fruits = ["kiwi", "apple", "mango"];
+  // const selectedFruits = fruits.filter((item, idx) => {
+  //   return item !== "apple";
+  // });
+  // console.log("🚀 ~ file: TodoMain.js:55 ~ selectedFruits ~ selectedFruits", selectedFruits);
+  // const newTodoList = todoList.filter((item, idx) => {
+  //   return item.id !== 3;
+  // });
+  // console.log(newTodoList);
+
   return (
     // props는 properties
     // <input type="text">
     // <img src="이미지 경로" alt="jfkdjsfd">
     <>
       <Header title="TODO-APP" />
-      <TodoInsert insertTodoItem={insertTodoItem} todoTxt={todoTxt} />
-      <TodoList todos={todoList} title="안녕" msg="메세지" />
+      <TodoInsert insertTodoItem={insertTodoItem} />
+      <TodoList todos={todoList} modifyTodoList={modifyTodoList} deleteTodoList={deleteTodoList} />
       <Footer />
     </>
   );

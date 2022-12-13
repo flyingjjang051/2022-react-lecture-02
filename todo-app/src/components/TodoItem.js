@@ -1,21 +1,23 @@
 import React from "react";
 
-function TodoItem(props) {
-  function changeFunc() {
-    //console.log("체인지");
-    //부모의
+function TodoItem({ done, title, modifyTodoList, deleteTodoList, id }) {
+  function changeDone() {
+    modifyTodoList(id);
+  }
+  function deleteItem() {
+    deleteTodoList(id);
   }
   return (
     <li>
-      <div className={`${props.done ? "done" : ""} item`}>
-        {/* <input type="checkbox" checked={props.done} /> */}
-        <input type="checkbox" defaultChecked={props.done} onChange={changeFunc} />
-        <p>{props.title}</p>
+      <div className={`${done ? "done" : ""} item`}>
+        {/* <input type="checkbox" checked={done} /> */}
+        <input type="checkbox" defaultChecked={done} onChange={changeDone} />
+        <p>{title}</p>
         <div className="btns">
           <button className="btn-edit">
             <i className="fa-solid fa-pen"></i>
           </button>
-          <button className="btn-del">
+          <button className="btn-del" onClick={deleteItem}>
             <i className="fa-solid fa-trash-can"></i>
           </button>
         </div>
