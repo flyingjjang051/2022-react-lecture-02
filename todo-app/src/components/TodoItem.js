@@ -1,11 +1,15 @@
 import React from "react";
 
 function TodoItem(props) {
+  function changeFunc() {
+    //console.log("체인지");
+    //부모의
+  }
   return (
     <li>
       <div className={`${props.done ? "done" : ""} item`}>
         {/* <input type="checkbox" checked={props.done} /> */}
-        <input type="checkbox" defaultChecked={props.done} />
+        <input type="checkbox" defaultChecked={props.done} onChange={changeFunc} />
         <p>{props.title}</p>
         <div className="btns">
           <button className="btn-edit">
