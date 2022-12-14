@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import List from "./components/List";
 import Detail from "./components/Detail";
-
+import NotFound from "./components/NotFound";
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +13,8 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="/" element={<List></List>}></Route>
-          <Route path="/detail" element={<Detail></Detail>}></Route>
+          <Route path="/detail/:id" element={<Detail></Detail>}></Route>
+          {/* <Route path="*" element={<NotFound></NotFound>}></Route> */}
         </Routes>
         <Footer></Footer>
       </div>
