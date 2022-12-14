@@ -117,3 +117,89 @@ body {
   border-radius: 5px;
   font-size: 14px;
 }
+
+.detail-box {
+  display: flex;
+  align-items: flex-start;
+}
+.detail-box .img-box {
+  box-sizing: border-box;
+  width: 300px;
+  border-radius: 0 50px 0 50px;
+  border: 10px solid #fff;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.detail-box .img-box img {
+  vertical-align: top;
+}
+.detail-box .info {
+  background-color: #fff;
+  margin-left: 30px;
+  flex-grow: 1;
+  padding: 30px;
+  border-radius: 50px 0 50px 0;
+}
+.detail-box .info .title-box {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #111;
+}
+.detail-box .info .title-box h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.detail-box .info .summary dl {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px dashed #ccc;
+}
+.detail-box .info .summary dl dt {
+  color: #999;
+}
+.detail-box .info .summary dl dd {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.detail-box .info .summary dl .desc {
+  font-size: 16px;
+}
+
+.bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+.bg:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+.footer p {
+  padding: 10px 50px;
+  background-color: #fff;
+  color: #111;
+  font-size: 14px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
