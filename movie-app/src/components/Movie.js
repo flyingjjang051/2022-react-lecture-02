@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /*
 export default function Movie({ title, originalTitle, releaseDate, poster }) {
@@ -26,21 +27,23 @@ export default function Movie({ title, originalTitle, releaseDate, poster }) {
 export default function Movie({ movieInfo }) {
   return (
     <li>
-      <div className="img-box">
-        <img src={`https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`} alt="" />
-        <span className="point">{movieInfo.vote_average}</span>
-      </div>
-      <div className="info">
-        <div className="title-box">
-          <h3>{movieInfo.title}</h3>
-          <p className="original-title">{movieInfo.original_title}</p>
-          <p className="open-date">{movieInfo.release_date}</p>
+      <Link to="/detail">
+        <div className="img-box">
+          <img src={`https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`} alt="" />
+          <span className="point">{movieInfo.vote_average}</span>
         </div>
-        <div className="overview-box">
-          <p className="overview">{movieInfo.overview}</p>
-          <p className="vote">{movieInfo.vote_count}</p>
+        <div className="info">
+          <div className="title-box">
+            <h3>{movieInfo.title}</h3>
+            <p className="original-title">{movieInfo.original_title}</p>
+            <p className="open-date">{movieInfo.release_date}</p>
+          </div>
+          <div className="overview-box">
+            <p className="overview">{movieInfo.overview}</p>
+            <p className="vote">{movieInfo.vote_count}</p>
+          </div>
         </div>
-      </div>
+      </Link>
     </li>
   );
 }
