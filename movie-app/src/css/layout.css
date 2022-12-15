@@ -167,6 +167,23 @@ body {
 .detail-box .info .summary dl .desc {
   font-size: 16px;
 }
+.detail-box .cast-list {
+  overflow: hidden;
+  width: 1000px;
+}
+.detail-box .cast-list .item {
+  width: 120px;
+}
+.detail-box .cast-list .item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.detail-box .cast-list .item .profile-info {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
 
 .bg {
   position: fixed;

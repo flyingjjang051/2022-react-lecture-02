@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Profile from "./Profile";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 export default function Detail() {
   //const [count, setCount] = useState(0);
@@ -8,6 +11,7 @@ export default function Detail() {
   console.log("🚀 ~ file: Detail.js:7 ~ Detail ~ movieId", movieId);
   const [detail, setDetail] = useState({});
   const [genres, setGenres] = useState("");
+  const [cast, setCast] = useState([]);
   //useState, map
   useEffect(() => {
     //prettier-ignore
@@ -22,7 +26,8 @@ export default function Detail() {
     //prettier-ignore
     axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=c3531c0fd9611d97111b750a606e8fdb&language=ko-KR`)
     .then((response)=>{
-      console.log(response.data.cast);
+      //console.log(response.data.cast);
+      setCast(response.data.cast);
     })
   }, []);
 
@@ -66,7 +71,17 @@ export default function Detail() {
               </dl>
               <dl>
                 <dt>주요출연진</dt>
-                <dd></dd>
+                <dd>
+                  <Swiper spaceBetween={10} slidesPerView={8} className="cast-list">
+                    {cast.map((item, idx) => {
+                      return (
+                        <SwiperSlide className="item">
+                          <Profile img={item.profile_path} name={item.name} gender={item.gender} key={idx}></Profile>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </dd>
               </dl>
             </div>
           </div>
