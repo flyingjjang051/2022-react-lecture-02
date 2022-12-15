@@ -64,9 +64,18 @@ export default function ProfileDetail() {
               <dl>
                 <dt>주요출연작</dt>
                 <dd>
-                  {movies.map((item, idx) => {
-                    return <MovieItem title={item.title} poster={item.poster_path} id={item.id}></MovieItem>;
-                  })}
+                  {/* 20개만 뿌리기.... swiper 만들기 */}
+                  <Swiper spaceBetween={10} slidesPerView={5} className="movie-list">
+                    {movies.map((item, idx) => {
+                      if (idx < 20) {
+                        return (
+                          <SwiperSlide className="item">
+                            <MovieItem title={item.title} poster={item.poster_path} id={item.id}></MovieItem>
+                          </SwiperSlide>
+                        );
+                      }
+                    })}
+                  </Swiper>
                 </dd>
               </dl>
             </div>

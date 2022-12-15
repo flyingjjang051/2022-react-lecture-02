@@ -181,6 +181,23 @@ body {
       }
     }
   }
+  .movie-list {
+    overflow: hidden;
+    width: 1000px;
+    .item {
+      width: 120px;
+      img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+      .movie-info {
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
 }
 
 .bg {
