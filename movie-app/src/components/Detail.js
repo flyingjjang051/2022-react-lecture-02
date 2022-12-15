@@ -76,7 +76,7 @@ export default function Detail() {
                     {cast.map((item, idx) => {
                       return (
                         <SwiperSlide className="item">
-                          <Profile img={item.profile_path} name={item.name} gender={item.gender} key={idx}></Profile>
+                          <Profile img={item.profile_path} name={item.name} gender={item.gender} id={item.id} key={idx}></Profile>
                         </SwiperSlide>
                       );
                     })}

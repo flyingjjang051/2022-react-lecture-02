@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import List from "./components/List";
 import Detail from "./components/Detail";
+import ProfileDetail from "./components/ProfileDetail";
 import NotFound from "./components/NotFound";
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<List></List>}></Route>
           <Route path="/detail/:id" element={<Detail></Detail>}></Route>
+          <Route path="/profile/:id" element={<ProfileDetail></ProfileDetail>}></Route>
           {/* <Route path="*" element={<NotFound></NotFound>}></Route> */}
         </Routes>
         <Footer></Footer>
