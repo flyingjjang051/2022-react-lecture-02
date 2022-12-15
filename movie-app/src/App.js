@@ -7,6 +7,7 @@ import List from "./components/List";
 import Detail from "./components/Detail";
 import ProfileDetail from "./components/ProfileDetail";
 import NotFound from "./components/NotFound";
+import SearchResult from "./components/SearchResult";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<List></List>}></Route>
           <Route path="/detail/:id" element={<Detail></Detail>}></Route>
           <Route path="/profile/:id" element={<ProfileDetail></ProfileDetail>}></Route>
+          <Route path="/search" element={<SearchResult></SearchResult>}></Route>
           {/* <Route path="*" element={<NotFound></NotFound>}></Route> */}
         </Routes>
         <Footer></Footer>

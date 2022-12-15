@@ -25,7 +25,7 @@ export default function ProfileDetail() {
       console.log(response.data.cast);
       setMovies(response.data.cast);
     })
-  }, []);
+  }, [profileId]);
 
   return (
     <>
@@ -45,6 +45,12 @@ export default function ProfileDetail() {
                 <dt>생일</dt>
                 <dd>{detail.birthday}</dd>
               </dl>
+              {detail.deathday && (
+                <dl>
+                  <dt>사망</dt>
+                  <dd>{detail.deathday}</dd>
+                </dl>
+              )}
               <dl>
                 <dt>국적</dt>
                 <dd>{detail.place_of_birth}</dd>
@@ -53,14 +59,16 @@ export default function ProfileDetail() {
                 <dt>인기도</dt>
                 <dd>{detail.popularity}</dd>
               </dl>
-              <dl>
-                <dt>homepage</dt>
-                <dd class="desc">
-                  <a href={detail.homepage} target="_blank" rel="noopener noreferrer">
-                    {detail.homepage}
-                  </a>
-                </dd>
-              </dl>
+              {detail.homepage && (
+                <dl>
+                  <dt>homepage</dt>
+                  <dd class="desc">
+                    <a href={detail.homepage} target="_blank" rel="noopener noreferrer">
+                      {detail.homepage}
+                    </a>
+                  </dd>
+                </dl>
+              )}
               <dl>
                 <dt>주요출연작</dt>
                 <dd>
@@ -70,7 +78,7 @@ export default function ProfileDetail() {
                       if (idx < 20) {
                         return (
                           <SwiperSlide className="item">
-                            <MovieItem title={item.title} poster={item.poster_path} id={item.id}></MovieItem>
+                            <MovieItem title={item.title} poster={item.poster_path} id={item.id} key={idx}></MovieItem>
                           </SwiperSlide>
                         );
                       }

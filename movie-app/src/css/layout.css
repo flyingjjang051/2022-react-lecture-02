@@ -20,7 +20,7 @@ body {
 }
 
 .header {
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,6 +30,39 @@ body {
 }
 .header h1 {
   font-size: 16px;
+}
+.header .back {
+  border: none;
+  position: absolute;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  outline: none;
+  background: none;
+  font-size: 20px;
+}
+.header .search {
+  position: absolute;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #eee;
+  border-radius: 5px;
+  top: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.header .search input {
+  border: none;
+  outline: none;
+  width: 300px;
+  height: 30px;
+  background: none;
+}
+.header .search button {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 20px;
 }
 
 .container {
