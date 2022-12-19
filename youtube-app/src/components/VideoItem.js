@@ -11,8 +11,8 @@ export default function VideoItem({ videoId, snippet, selectedVideo }) {
         <img src={snippet.thumbnails.high.url} alt={snippet.title} />
       </div>
       <div className="info">
-        <h3>{snippet.title}</h3>
-        <p>{snippet.description}</p>
+        <h3 dangerouslySetInnerHTML={{ __html: snippet.title }}></h3>
+        <p dangerouslySetInnerHTML={{ __html: snippet.description }}></p>
       </div>
     </li>
   );

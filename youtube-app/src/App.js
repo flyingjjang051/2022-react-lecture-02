@@ -1,4 +1,5 @@
 import Main from "./components/Main";
+import Search from "./components/Search";
 import "./css/layout.css";
 
 function App() {

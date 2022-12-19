@@ -10,8 +10,8 @@ export default function Detail({ videoId, title, description }) {
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <h3 dangerouslySetInnerHTML={{ __html: title }}></h3>
+      <p dangerouslySetInnerHTML={{ __html: description }}></p>
     </div>
   );
 }

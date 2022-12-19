@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Detail from "./Detail";
 import List from "./List";
+import Search from "./Search";
+import axios from "axios";
 
 export default function Main() {
   const [videoInfo, setVideoInfo] = useState({});
@@ -12,11 +14,13 @@ export default function Main() {
     setVideoInfo({ videoId: videoInfo.videoId, title: videoInfo.snippet.title, description: videoInfo.snippet.description });
     setIsDetail(true);
   };
-
   return (
-    <div className={"main" + (isDetail ? " detail-view" : "")}>
-      {isDetail && <Detail videoId={videoInfo.videoId} title={videoInfo.title} description={videoInfo.description}></Detail>}
-      <List selectedVideo={selectedVideo}></List>
-    </div>
+    <>
+      <Search></Search>
+      <div className={"main" + (isDetail ? " detail-view" : "")}>
+        {isDetail && <Detail videoId={videoInfo.videoId} title={videoInfo.title} description={videoInfo.description}></Detail>}
+        <List selectedVideo={selectedVideo}></List>
+      </div>
+    </>
   );
 }

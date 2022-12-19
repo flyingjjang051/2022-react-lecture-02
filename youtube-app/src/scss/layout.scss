@@ -25,21 +25,15 @@ body {
   background-color: #fff;
   color: #111;
   font-size: 16px;
+  position: relative;
   h1 {
-    font-size: 16px;
-  }
-  .back {
-    border: none;
-    position: absolute;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    outline: none;
-    background: none;
-    font-size: 20px;
+    img {
+      height: 40px;
+    }
   }
   .search {
     position: absolute;
+    top: 10px;
     right: 20px;
     padding: 5px 15px;
     background-color: #eee;
@@ -74,24 +68,51 @@ body {
   }
   &.detail-view {
     display: flex;
+    .container {
+      margin-top: 0;
+    }
     .detail {
-      width: 80%;
+      width: 70%;
       flex-shrink: 0;
+      iframe {
+        width: 100%;
+        height: calc(1400px * 0.7 * 9 / 16);
+      }
+      h3 {
+        color: #fff;
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      p {
+        color: #fff;
+        line-height: 1.5;
+      }
     }
     .video-list {
       flex-direction: column;
       li {
         flex-direction: row;
+        width: 100%;
+        .img-box {
+          width: 150px;
+          flex-shrink: 0;
+          img {
+            width: 100%;
+          }
+        }
         .info {
+          margin-left: 10px;
           h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 0;
             margin-top: 0px;
+            @include multiElilipsis(2, 1.5);
           }
           p {
             font-size: 14px;
-            line-height: 1.5;
+            @include multiElilipsis(2, 1.5);
           }
         }
       }
