@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import VideoItem from "./VideoItem";
-export default function List({ selectedVideo }) {
-  const [videos, setVideos] = useState([]);
-  console.log(process.env.REACT_APP_YOUTUBE_KEY);
-  useEffect(() => {
-    //prettier-ignore
-    axios
-    .get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=30&type=video&key=AIzaSyCqR8Om3ue8mVhhl9yDUUEXiG4t8Fyjpds&chart=mostPopular&regionCode=KR`)
-    .then((response) => {
-      setVideos(response.data.items);
-    });
-  }, []);
-
+export default function List({ selectedVideo, videos }) {
   return (
     <div className="container">
       <ul className="video-list">

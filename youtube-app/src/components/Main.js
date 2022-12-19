@@ -14,12 +14,30 @@ export default function Main() {
     setVideoInfo({ videoId: videoInfo.videoId, title: videoInfo.snippet.title, description: videoInfo.snippet.description });
     setIsDetail(true);
   };
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    //prettier-ignore
+    axios
+    .get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=30&type=video&key=AIzaSyCqR8Om3ue8mVhhl9yDUUEXiG4t8Fyjpds&chart=mostPopular&regionCode=KR`)
+    .then((response) => {
+      setVideos(response.data.items);
+    });
+  }, []);
+
+  const onSearch = (searchTxt) => {
+    axios
+      .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&type=video&key=AIzaSyCqR8Om3ue8mVhhl9yDUUEXiG4t8Fyjpds&order=rating&regionCode=KR&q=${searchTxt}`)
+      .then((response) => {
+        setVideos(response.data.items);
+      });
+  };
+
   return (
     <>
-      <Search></Search>
+      <Search onSearch={onSearch}></Search>
       <div className={"main" + (isDetail ? " detail-view" : "")}>
         {isDetail && <Detail videoId={videoInfo.videoId} title={videoInfo.title} description={videoInfo.description}></Detail>}
-        <List selectedVideo={selectedVideo}></List>
+        <List selectedVideo={selectedVideo} videos={videos}></List>
       </div>
     </>
   );
