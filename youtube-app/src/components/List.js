@@ -6,11 +6,9 @@ export default function List({ selectedVideo }) {
   useEffect(() => {
     //prettier-ignore
     axios
-    .get("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&type=video&key=AIzaSyBSlE37aUdzPiiWwzK7yzRuRdqgxl4WnsM&chart=mostPopular")
+    .get("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&type=video&key=AIzaSyDDSzNqufJMWsd5jb0CNQi-7leUxawsIxA&chart=mostPopular")
     .then((response) => {
-      console.log(response.data);
       setVideos(response.data.items);
-      console.log(videos);
     });
   }, []);
 
@@ -19,7 +17,7 @@ export default function List({ selectedVideo }) {
       <h2>List</h2>
       <ul className="video-list">
         {videos.map((item, idx) => {
-          return <VideoItem url={item.snippet.thumbnails.high.url} title={item.snippet.title} description={item.snippet.description} key={idx} selectedVideo={selectedVideo}></VideoItem>;
+          return <VideoItem snippet={item.snippet} videoId={item.id.videoId} key={idx} selectedVideo={selectedVideo}></VideoItem>;
         })}
       </ul>
     </div>

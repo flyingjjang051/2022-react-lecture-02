@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Detail({ videoId, title, channel, description }) {
+export default function Detail({ videoId, title, description }) {
   return (
     <div className="detail">
       <iframe
@@ -10,9 +10,8 @@ export default function Detail({ videoId, title, channel, description }) {
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
-      <h2>{title}</h2>
-      <h2>{channel}</h2>
-      <h2>{description}</h2>
+      <h3>{title}</h3>
+      <p>{description}</p>
     </div>
   );
 }

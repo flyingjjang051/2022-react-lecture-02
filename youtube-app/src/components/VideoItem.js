@@ -1,18 +1,18 @@
 import React from "react";
 
-export default function VideoItem({ url, title, description, selectedVideo }) {
+// props drilling
+export default function VideoItem({ videoId, snippet, selectedVideo }) {
   const onClickFunc = () => {
-    console.log("click");
-    selectedVideo();
+    selectedVideo({ snippet: snippet, videoId: videoId });
   };
   return (
     <li onClick={onClickFunc}>
       <div className="img-box">
-        <img src={url} alt={title} />
+        <img src={snippet.thumbnails.high.url} alt={snippet.title} />
       </div>
       <div className="info">
-        <h3>{title}</h3>
-        <p>{description}</p>
+        <h3>{snippet.title}</h3>
+        <p>{snippet.description}</p>
       </div>
     </li>
   );

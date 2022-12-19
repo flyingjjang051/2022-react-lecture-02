@@ -74,6 +74,29 @@ body {
 .main .detail iframe {
   height: 787.5px;
 }
+.main.detail-view {
+  display: flex;
+}
+.main.detail-view .detail {
+  width: 80%;
+  flex-shrink: 0;
+}
+.main.detail-view .video-list {
+  flex-direction: column;
+}
+.main.detail-view .video-list li {
+  flex-direction: row;
+}
+.main.detail-view .video-list li .info h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+.main.detail-view .video-list li .info p {
+  font-size: 14px;
+  line-height: 1.5;
+}
 
 .container {
   margin: 100px auto;

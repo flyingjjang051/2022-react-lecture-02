@@ -72,6 +72,31 @@ body {
       height: calc(1400px * 9 / 16);
     }
   }
+  &.detail-view {
+    display: flex;
+    .detail {
+      width: 80%;
+      flex-shrink: 0;
+    }
+    .video-list {
+      flex-direction: column;
+      li {
+        flex-direction: row;
+        .info {
+          h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            margin-top: 0px;
+          }
+          p {
+            font-size: 14px;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  }
 }
 .container {
   margin: 100px auto;
