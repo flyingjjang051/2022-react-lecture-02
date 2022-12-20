@@ -5,8 +5,6 @@ import { QuestionData } from "../assets/data/question";
 
 export default function Question() {
   const navigate = useNavigate();
-  //1~3  EI판변  {id:"EI",score:0~3}
-  //4~6  SN판변  {id:"SN",score:0~3}
   const [questionNo, setQuestionNo] = useState(0);
   const [totalScore, setTotalScore] = useState([
     { id: "EI", score: 0 },
@@ -21,15 +19,16 @@ export default function Question() {
   //   { id: "TF", score: 2 },
   //   { id: "JP", score: 1 },
   // ]
-  const total = QuestionData.length;
+  const total = QuestionData.length - 1;
   const onClick = (point, type) => {
     const newScore = totalScore.map((item) => (item.id === type ? { id: item.id, score: item.score + point } : item));
     setTotalScore(newScore);
-    if (questionNo === total - 1) {
+    setQuestionNo(questionNo + 1);
+    if (questionNo < total) {
+      setQuestionNo(questionNo + 1);
+    } else {
       const mbti = newScore.reduce((acc, current) => acc + (current.score >= 2 ? current.id.charAt(0) : current.id.charAt(1)), "");
       navigate(`/result?mbti=${mbti}`);
-    } else {
-      setQuestionNo(questionNo + 1);
     }
   };
   return (
@@ -40,7 +39,7 @@ export default function Question() {
 
       <Progress>
         <div className="inner">
-          <div className="bar" style={{ width: `${(questionNo / 12) * 100}%` }}></div>
+          <div className="bar" style={{ width: `${(questionNo / total) * 100}%` }}></div>
         </div>
       </Progress>
 
