@@ -4,13 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { QuestionData } from "../assets/data/question";
 
 export default function Question() {
+  const navigate = useNavigate();
+  //1~3  EI판변  {id:"EI",score:0~3}
+  //4~6  SN판변  {id:"SN",score:0~3}
   const [questionNo, setQuestionNo] = useState(0);
-  //console.log(QuestionData[questionNo].title);
+  const [totalScore, setTotalScore] = useState([
+    { id: "EI", score: 0 },
+    { id: "SN", score: 0 },
+    { id: "TF", score: 0 },
+    { id: "JP", score: 0 },
+  ]);
+
   const total = QuestionData.length;
-  const onClick = () => {
+  const onClick = (point, type) => {
+    const newScore = totalScore.map((item) => (item.id === type ? { id: item.id, score: item.score + point } : item));
+    setTotalScore(newScore);
+    setQuestionNo(questionNo + 1);
     if (questionNo < total - 1) {
-      setQuestionNo(questionNo + 1);
     } else {
+      navigate("/result");
     }
   };
   return (
@@ -28,8 +40,22 @@ export default function Question() {
       <Title>{QuestionData[questionNo].title}</Title>
 
       <Buttons>
-        <Button onClick={onClick}>{QuestionData[questionNo].answera}</Button>
-        <Button onClick={onClick}>{QuestionData[questionNo].answerb}</Button>
+        <Button
+          onClick={() => {
+            onClick(1, QuestionData[questionNo].type);
+          }}
+        >
+          {QuestionData[questionNo].answera}
+          <div>{QuestionData[questionNo].type}</div>
+        </Button>
+        <Button
+          onClick={() => {
+            onClick(0, QuestionData[questionNo].type);
+          }}
+        >
+          {QuestionData[questionNo].answerb}
+          <div>{QuestionData[questionNo].type}</div>
+        </Button>
       </Buttons>
     </Container>
   );
