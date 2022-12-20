@@ -7,6 +7,7 @@ import axios from "axios";
 export default function Main() {
   const [videoInfo, setVideoInfo] = useState({});
   const [isDetail, setIsDetail] = useState(false);
+
   useEffect(() => {
     setVideoInfo({ videoId: "mgbZunbhsX0", title: "hello", description: "설명글이 들어갑니다.", channel: "fdisfudi" });
   }, []);
@@ -15,13 +16,22 @@ export default function Main() {
     setIsDetail(true);
   };
   const [videos, setVideos] = useState([]);
+
+  const scrollTop = () => {
+    //window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    console.log("aaa");
+  };
+  const showMain = () => {
+    axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=30&type=video&key=AIzaSyCqR8Om3ue8mVhhl9yDUUEXiG4t8Fyjpds&chart=mostPopular&regionCode=KR`).then((response) => {
+      setVideos(response.data.items);
+      setIsDetail(false);
+    });
+  };
+
   useEffect(() => {
     //prettier-ignore
-    axios
-    .get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=30&type=video&key=AIzaSyCqR8Om3ue8mVhhl9yDUUEXiG4t8Fyjpds&chart=mostPopular&regionCode=KR`)
-    .then((response) => {
-      setVideos(response.data.items);
-    });
+    showMain();
   }, []);
 
   const onSearch = (searchTxt) => {
@@ -34,10 +44,10 @@ export default function Main() {
 
   return (
     <>
-      <Search onSearch={onSearch}></Search>
+      <Search onSearch={onSearch} showMain={showMain}></Search>
       <div className={"main" + (isDetail ? " detail-view" : "")}>
         {isDetail && <Detail videoId={videoInfo.videoId} title={videoInfo.title} description={videoInfo.description}></Detail>}
-        <List selectedVideo={selectedVideo} videos={videos}></List>
+        <List selectedVideo={selectedVideo} videos={videos} scrollTop={scrollTop}></List>
       </div>
     </>
   );

@@ -1,22 +1,23 @@
 import React, { useRef, useState } from "react";
 import logo from "../assets/images/logo.png";
-export default function Search({ onSearch }) {
+export default function Search({ onSearch, showMain }) {
   const inputRef = useRef();
   const [search, setSearch] = useState("");
   const onClick = () => {
-    console.log(search); // 실시간 검색
-    console.log(inputRef.current.value);
     onSearch(search);
   };
   const onKeyDown = () => {
-    console.log(search); // 실시간 검색
-    console.log(inputRef.current.value);
     onSearch(search);
   };
   return (
     <header className="header">
       <div className="container">
-        <h1>
+        <h1
+          onClick={() => {
+            showMain();
+            inputRef.current.value = "";
+          }}
+        >
           <img src={logo} alt="마이튜브" />
         </h1>
         <div className="search">
@@ -25,6 +26,7 @@ export default function Search({ onSearch }) {
             ref={inputRef}
             onChange={(e) => {
               setSearch(e.currentTarget.value);
+              console.log(search);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {

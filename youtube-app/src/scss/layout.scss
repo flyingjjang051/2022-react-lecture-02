@@ -68,8 +68,10 @@ body {
   }
   &.detail-view {
     display: flex;
+    margin-top: 100px;
     .container {
       margin-top: 0;
+      width: 30%;
     }
     .detail {
       width: 70%;
@@ -94,6 +96,7 @@ body {
       li {
         flex-direction: row;
         width: 100%;
+        box-sizing: border-box;
         .img-box {
           width: 150px;
           flex-shrink: 0;
@@ -103,6 +106,7 @@ body {
         }
         .info {
           margin-left: 10px;
+          width: calc(100% - 160px);
           h3 {
             font-size: 18px;
             font-weight: 500;

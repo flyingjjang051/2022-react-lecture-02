@@ -68,9 +68,11 @@ body {
 }
 .main.detail-view {
   display: flex;
+  margin-top: 100px;
 }
 .main.detail-view .container {
   margin-top: 0;
+  width: 30%;
 }
 .main.detail-view .detail {
   width: 70%;
@@ -96,6 +98,7 @@ body {
 .main.detail-view .video-list li {
   flex-direction: row;
   width: 100%;
+  box-sizing: border-box;
 }
 .main.detail-view .video-list li .img-box {
   width: 150px;
@@ -106,6 +109,7 @@ body {
 }
 .main.detail-view .video-list li .info {
   margin-left: 10px;
+  width: calc(100% - 160px);
 }
 .main.detail-view .video-list li .info h3 {
   font-size: 18px;

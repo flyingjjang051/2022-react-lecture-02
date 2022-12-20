@@ -1,9 +1,10 @@
 import React from "react";
 
 // props drilling
-export default function VideoItem({ videoId, snippet, selectedVideo }) {
+export default function VideoItem({ videoId, snippet, selectedVideo, scrollTop }) {
   const onClickFunc = () => {
     selectedVideo({ snippet: snippet, videoId: videoId });
+    scrollTop();
   };
   return (
     <li onClick={onClickFunc}>
