@@ -14,15 +14,22 @@ export default function Question() {
     { id: "TF", score: 0 },
     { id: "JP", score: 0 },
   ]);
-
+  // const defaultData =
+  // [
+  //   { id: "EI", score: 3 },
+  //   { id: "SN", score: 1 },
+  //   { id: "TF", score: 2 },
+  //   { id: "JP", score: 1 },
+  // ]
   const total = QuestionData.length;
   const onClick = (point, type) => {
     const newScore = totalScore.map((item) => (item.id === type ? { id: item.id, score: item.score + point } : item));
     setTotalScore(newScore);
-    setQuestionNo(questionNo + 1);
-    if (questionNo < total - 1) {
+    if (questionNo === total - 1) {
+      const mbti = newScore.reduce((acc, current) => acc + (current.score >= 2 ? current.id.charAt(0) : current.id.charAt(1)), "");
+      navigate(`/result?mbti=${mbti}`);
     } else {
-      navigate("/result");
+      setQuestionNo(questionNo + 1);
     }
   };
   return (
