@@ -36,8 +36,13 @@ const Title = styled.h2`
 const LogoImage = styled.div`
   display: flex;
   justify-content: center;
-  width: 300px;
+  width: 80%;
   margin-top: 80px;
+  img {
+    max-height: 400px;
+    width: 100%;
+    object-fit: contain;
+  }
 `;
 const Button = styled.button`
   border: none;
@@ -47,7 +52,7 @@ const Button = styled.button`
   width: 80%;
   padding: 20px;
   border-radius: 15px;
-  font-size: 24px;
+  font-size: 18px;
   color: #000;
   font-family: inherit;
   margin-top: 50px;
@@ -61,7 +66,7 @@ export default function Home() {
       </Header>
       <Title>내가 과연 고양이 집사가 될 관상인가?</Title>
       <LogoImage>
-        <img src={LogoImg} alt="main" style={{ width: "100%" }}></img>
+        <img src={LogoImg} alt="main"></img>
       </LogoImage>
 
       <Button
