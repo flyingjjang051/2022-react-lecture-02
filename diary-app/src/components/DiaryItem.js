@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function DiaryItem({ author, contents, emotion, date }) {
+export default function DiaryItem({ id, author, contents, emotion, date, deleteDiary }) {
+  const [isEdit, setIsEdit] = useState(false);
   return (
     <Item>
       <Info>
@@ -17,7 +18,41 @@ export default function DiaryItem({ author, contents, emotion, date }) {
         </div>
         <div className="date">{new Date(date).toLocaleString()}</div>
       </Info>
-      <Contents>{contents}</Contents>
+      {isEdit ? <ContentsBox value="눈이 옵니다. 집에 어떻게 가나요?"></ContentsBox> : <Contents>{contents}</Contents>}
+
+      {isEdit ? (
+        <Buttons>
+          <Button>
+            <i class="fa-solid fa-check"></i>
+          </Button>
+          <Button
+            onClick={() => {
+              setIsEdit(false);
+            }}
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </Button>
+        </Buttons>
+      ) : (
+        <Buttons>
+          <Button
+            onClick={() => {
+              if (window.confirm(`${id}번째 일기를 정말로 삭제 하시겠어요?`)) {
+                deleteDiary(id);
+              }
+            }}
+          >
+            <i className="fa-solid fa-trash-can"></i>
+          </Button>
+          <Button
+            onClick={() => {
+              setIsEdit(true);
+            }}
+          >
+            <i className="fa-regular fa-pen-to-square"></i>
+          </Button>
+        </Buttons>
+      )}
     </Item>
   );
 }
@@ -61,4 +96,37 @@ const Info = styled.div`
 const Contents = styled.div`
   margin-top: 15px;
   text-align: left;
+`;
+const Button = styled.div`
+  background-color: #111;
+  color: #fff;
+  margin-left: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 30px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  :nth-child(1) {
+    margin-left: 0;
+  }
+`;
+const Buttons = styled.div`
+  display: flex;
+  margin-top: 15px;
+`;
+const ContentsBox = styled.textarea`
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  padding: 15px;
+  width: 100%;
+  min-height: 120px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 20px;
+  :focus {
+    border-color: #f00;
+  }
 `;

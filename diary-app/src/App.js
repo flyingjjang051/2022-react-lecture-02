@@ -14,18 +14,19 @@ function App() {
   const dataId = useRef(4);
   const [diaryListArray, setDiaryListArray] = useState([...dummy]);
   const insertDiary = (author, contents, emotion) => {
-    // const newDiaryList = [...diaryListArray];
-    // const newDiaryItem = { id: 5, author: "송지효", contents: "졸리다. 졸리다. 졸리우다", emotion: 4, date: new Date().getTime() };
-    // newDiaryList.push(newDiaryItem);
-    // setDiaryListArray(newDiaryList);
     const newDiaryItem = { id: ++dataId.current, author: author, contents: contents, emotion: emotion, date: new Date().getTime() };
     setDiaryListArray([newDiaryItem, ...diaryListArray]);
+  };
+  const deleteDiary = (id) => {
+    //console.log(id + "   deleteDiary");
+    const newDiaryList = diaryListArray.filter((item, idx) => item.id !== id);
+    setDiaryListArray(newDiaryList);
   };
   return (
     <div className="App">
       <GlobalStyle></GlobalStyle>
       <DiaryEditor insertDiary={insertDiary}></DiaryEditor>
-      <DiaryList diaryList={diaryListArray}></DiaryList>
+      <DiaryList diaryList={diaryListArray} deleteDiary={deleteDiary}></DiaryList>
     </div>
   );
 }

@@ -23,6 +23,7 @@ export default function DiaryEditor({ insertDiary }) {
     }
     insertDiary(state.author, state.contents, state.emotion);
     alert("일기가 저장되었습니다.");
+    setState({ author: "", contents: "", emotion: 3 });
   };
   const handleStateChange = (e) => {
     //console.log(e.target.name);
