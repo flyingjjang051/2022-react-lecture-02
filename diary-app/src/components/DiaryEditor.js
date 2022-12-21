@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
-export default function DiaryEditor() {
+export default function DiaryEditor({ insertDiary }) {
   // const [author, setAuthor] = useState("");
   // const [contents, setContents] = useState("");
   // const [emotion, setEmotion] = useState(0);
@@ -21,7 +21,7 @@ export default function DiaryEditor() {
       contentsRef.current.focus();
       return;
     }
-
+    insertDiary(state.author, state.contents, state.emotion);
     alert("일기가 저장되었습니다.");
   };
   const handleStateChange = (e) => {
