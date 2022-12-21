@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import LogoImg from "../assets/images/main-cat.png";
 import { useNavigate } from "react-router-dom";
+import "./Test.scss";
 
 // css in js
 

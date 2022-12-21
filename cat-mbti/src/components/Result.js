@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { ResultData } from "../assets/data/result";
+import KakaoShareButton from "../components/KakaoShareButton";
+import KakaoSharedButton from "./KakaoSharedButton";
 
 export default function Result() {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ export default function Result() {
       >
         다시하기
       </Button>
+      <KakaoSharedButton data={result}></KakaoSharedButton>
+      {/* <KakaoShareButton data={result} /> */}
     </Container>
   );
 }
@@ -62,8 +66,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   background-color: #000;
+  padding-bottom: 50px;
 `;
 
 const Title = styled.h2`
@@ -79,12 +83,13 @@ const Title = styled.h2`
 const LogoImage = styled.div`
   display: flex;
   justify-content: center;
-  width: 80%;
+  width: 60%;
   margin-top: 30px;
   img {
-    max-height: 400px;
     width: 100%;
-    object-fit: contain;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    object-fit: cover;
   }
 `;
 const Button = styled.button`
