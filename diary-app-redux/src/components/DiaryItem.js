@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { deleteDiary, modifyDiary } from "../store/diary";
 
 export default function DiaryItem({ id, author, contents, emotion, date }) {
   const [isEdit, setIsEdit] = useState(false);
   const [localContents, setLocalContents] = useState(contents);
+  const dispatch = useDispatch();
   return (
     <Item>
       <Info>
@@ -35,6 +38,7 @@ export default function DiaryItem({ id, author, contents, emotion, date }) {
             onClick={() => {
               if (window.confirm(`${id}번째 일기를 수정하시겠어요`)) {
                 setIsEdit(false);
+                dispatch(modifyDiary(id, localContents));
               }
             }}
           >
@@ -55,6 +59,7 @@ export default function DiaryItem({ id, author, contents, emotion, date }) {
           <Button
             onClick={() => {
               if (window.confirm(`${id}번째 일기를 정말로 삭제 하시겠어요?`)) {
+                dispatch(deleteDiary(id));
               }
             }}
           >

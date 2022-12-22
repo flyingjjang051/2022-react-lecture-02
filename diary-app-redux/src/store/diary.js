@@ -1,4 +1,4 @@
-// type
+// 상태에 쓸 것들 여기에 정의
 const initState = {
   count: 4,
   diaryListArray: [
@@ -8,12 +8,15 @@ const initState = {
     { id: 4, author: "지석진", contents: "유투브 만들어야지", emotion: 4, date: new Date().getTime() },
   ],
 };
+
+//action의 타입을 정의
 export const ACTIONS_TYPE = {
   INSERT_DIARY: "insertDiary",
   MODIFY_DIARY: "modifyDiary",
   DELETE_DIARY: "deleteDiary",
 };
 
+//action
 export const insertDiary = (diaryItem) => {
   return {
     type: ACTIONS_TYPE.INSERT_DIARY,
@@ -33,8 +36,8 @@ export const deleteDiary = (id) => {
   };
 };
 
+// 여기가 핵심 reducer
 const diary = (state = initState, action) => {
-  //action에 {type,payload} 가 들어온다.
   switch (action.type) {
     case ACTIONS_TYPE.INSERT_DIARY: {
       const newDiaryItem = { ...action.payload };
@@ -43,6 +46,23 @@ const diary = (state = initState, action) => {
         diaryListArray: [newDiaryItem, ...state.diaryListArray],
       };
     }
+    case ACTIONS_TYPE.DELETE_DIARY: {
+      const { id } = action.payload;
+      return {
+        count: state.count - 1,
+        diaryListArray: state.diaryListArray.filter((item, idx) => item.id !== id),
+      };
+    }
+    case ACTIONS_TYPE.MODIFY_DIARY: {
+      // const id = action.payload.id;
+      // const localContents = action.payload.localContents;
+      const { id, localContents } = action.payload;
+      return {
+        count: state.count,
+        diaryListArray: state.diaryListArray.map((item, idx) => (item.id === id ? { ...item, contents: localContents } : item)),
+      };
+    }
+
     default:
       return state;
   }
