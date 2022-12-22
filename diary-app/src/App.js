@@ -1,5 +1,6 @@
 import { useState, useRef, useMemo } from "react";
 import DiaryEditor from "./components/DiaryEditor";
+import DiaryInfo from "./components/DiaryInfo";
 import DiaryList from "./components/DiaryList";
 import GlobalStyle from "./components/GlobalStyle";
 
@@ -51,34 +52,7 @@ function App() {
     <div className="App">
       <GlobalStyle></GlobalStyle>
       <DiaryEditor insertDiary={insertDiary}></DiaryEditor>
-      <div className="info">
-        <ul>
-          <li>
-            <dl>
-              <dt>전체 일기</dt>
-              <dd>{total}</dd>
-            </dl>
-          </li>
-          <li>
-            <dl>
-              <dt>기분이 좋았던 날 일기</dt>
-              <dd>{good}</dd>
-            </dl>
-          </li>
-          <li>
-            <dl>
-              <dt>기분이 나빴던 날 일기</dt>
-              <dd>{bad}</dd>
-            </dl>
-          </li>
-          <li>
-            <dl>
-              <dt>기분이 나빴던 날 비율</dt>
-              <dd>{percent}%</dd>
-            </dl>
-          </li>
-        </ul>
-      </div>
+      <DiaryInfo good={good} bad={bad} total={total} percent={percent}></DiaryInfo>
       <DiaryList diaryList={diaryListArray} deleteDiary={deleteDiary} modifyDiary={modifyDiary}></DiaryList>
     </div>
   );
