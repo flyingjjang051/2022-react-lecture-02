@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
 import GlobalStyle from "./components/GlobalStyle";
@@ -22,11 +22,64 @@ function App() {
     const newDiaryList = diaryListArray.filter((item, idx) => item.id !== id);
     setDiaryListArray(newDiaryList);
   };
+  //고유 번호에 있는 걸 찾아서 내용을 바꿔야 한다.
+  const modifyDiary = (id, localContents) => {
+    const modifiedDiaryListArray = diaryListArray.map((item, idx) => (item.id === id ? { ...item, contents: localContents } : item));
+    setDiaryListArray(modifiedDiaryListArray);
+    //setDiaryListArray(diaryListArray.map((item, idx) => (item.id === id ? { ...item, contents: localContents } : item)));
+  };
+
+  // const editDiary = (id, localContents) => {
+  //   console.log(localContents);
+  //   const editDiaryList = diaryListArray.map((item, idx) => (item.id === id ? { ...item, contents: localContents } : item));
+  //   setDiaryListArray(editDiaryList);
+  // };
+  // 리액트에서 중요한거 중에 하나 리렌더링
+  // memoizaion  연산을 기억해 두는 거  연산값을 메모리에 저장해뒀다가 바뀔때만 다시 연산
+  const diaryAnalysis = useMemo(() => {
+    console.log("일기 분석을 시작합니다.");
+    const total = diaryListArray.length;
+    const good = diaryListArray.filter((item, idx) => item.emotion >= 3).length;
+    const bad = total - good;
+    const percent = (good / total) * 100;
+    //return { total: total, good: good, bad: bad, percent: percent };
+    return { total, good, bad, percent };
+  }, [diaryListArray.length]);
+  //console.log(diaryAnalysis());
+  const { good, bad, total, percent } = diaryAnalysis;
   return (
     <div className="App">
       <GlobalStyle></GlobalStyle>
       <DiaryEditor insertDiary={insertDiary}></DiaryEditor>
-      <DiaryList diaryList={diaryListArray} deleteDiary={deleteDiary}></DiaryList>
+      <div className="info">
+        <ul>
+          <li>
+            <dl>
+              <dt>전체 일기</dt>
+              <dd>{total}</dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt>기분이 좋았던 날 일기</dt>
+              <dd>{good}</dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt>기분이 나빴던 날 일기</dt>
+              <dd>{bad}</dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dt>기분이 나빴던 날 비율</dt>
+              <dd>{percent}%</dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+      <DiaryList diaryList={diaryListArray} deleteDiary={deleteDiary} modifyDiary={modifyDiary}></DiaryList>
     </div>
   );
 }

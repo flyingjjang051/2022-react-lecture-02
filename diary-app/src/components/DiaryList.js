@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DiaryItem from "./DiaryItem";
 
-export default function DiaryList({ diaryList, deleteDiary }) {
+export default function DiaryList({ diaryList, deleteDiary, modifyDiary }) {
   console.log(diaryList);
   const total = diaryList.length;
   return (
@@ -12,7 +12,7 @@ export default function DiaryList({ diaryList, deleteDiary }) {
       <List>
         {diaryList.map((item, idx) => {
           // return <DiaryItem author={item.author} contents={item.contents} date={item.date} emotion={item.emotion} key={item.id}></DiaryItem>;
-          return <DiaryItem {...item} key={item.id} deleteDiary={deleteDiary}></DiaryItem>;
+          return <DiaryItem {...item} key={item.id} deleteDiary={deleteDiary} modifyDiary={modifyDiary}></DiaryItem>;
         })}
       </List>
     </Wrapper>

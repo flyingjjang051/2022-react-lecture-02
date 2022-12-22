@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function DiaryItem({ id, author, contents, emotion, date, deleteDiary }) {
+export default function DiaryItem({ id, author, contents, emotion, date, deleteDiary, modifyDiary }) {
   const [isEdit, setIsEdit] = useState(false);
+  const [localContents, setLocalContents] = useState(contents);
   return (
     <Item>
       <Info>
@@ -18,16 +19,33 @@ export default function DiaryItem({ id, author, contents, emotion, date, deleteD
         </div>
         <div className="date">{new Date(date).toLocaleString()}</div>
       </Info>
-      {isEdit ? <ContentsBox value="눈이 옵니다. 집에 어떻게 가나요?"></ContentsBox> : <Contents>{contents}</Contents>}
-
+      {isEdit ? (
+        <ContentsBox
+          value={localContents}
+          onChange={(e) => {
+            setLocalContents(e.target.value);
+          }}
+        ></ContentsBox>
+      ) : (
+        <Contents>{contents}</Contents>
+      )}
       {isEdit ? (
         <Buttons>
-          <Button>
+          <Button
+            onClick={() => {
+              if (window.confirm(`${id}번째 일기를 수정하시겠어요`)) {
+                setIsEdit(false);
+                modifyDiary(id, localContents);
+              }
+            }}
+          >
             <i class="fa-solid fa-check"></i>
           </Button>
           <Button
             onClick={() => {
+              // 수정하다가 취소 했을때.....
               setIsEdit(false);
+              setLocalContents(contents);
             }}
           >
             <i className="fa-solid fa-xmark"></i>
