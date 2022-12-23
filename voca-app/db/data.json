@@ -40,51 +40,44 @@
     {
       "kor": "사자",
       "eng": "lion",
-      "done": false,
+      "done": true,
       "id": 2,
       "day": 1
     },
     {
+      "id": 3,
       "kor": "사과",
       "eng": "apple",
-      "done": false,
-      "id": 3,
-      "day": 2
+      "day": 1,
+      "done": true
     },
     {
+      "id": 4,
       "kor": "딸기",
       "eng": "strawberry",
-      "done": false,
-      "id": 4,
-      "day": 2
+      "day": 2,
+      "done": true
     },
     {
-      "kor": "지구",
-      "eng": "earth",
-      "done": false,
-      "id": 5,
-      "day": 3
-    },
-    {
+      "id": 6,
       "kor": "화성",
       "eng": "mars",
-      "done": false,
-      "id": 6,
-      "day": 3
+      "day": 3,
+      "done": true
     },
     {
-      "day": 1,
+      "id": 7,
       "kor": "강아지",
       "eng": "puppy",
-      "done": false,
-      "id": 7
+      "day": 1,
+      "done": true
     },
     {
-      "day": 1,
+      "id": 8,
       "kor": "소",
       "eng": "cow",
-      "done": false,
-      "id": 8
+      "day": 1,
+      "done": false
     },
     {
       "day": "4",
@@ -92,20 +85,6 @@
       "eng": "winter",
       "done": false,
       "id": 9
-    },
-    {
-      "day": "5",
-      "kor": "여름",
-      "eng": "summer",
-      "done": false,
-      "id": 10
-    },
-    {
-      "day": "6",
-      "kor": "가을",
-      "eng": "fall",
-      "done": false,
-      "id": 11
     }
   ]
 }

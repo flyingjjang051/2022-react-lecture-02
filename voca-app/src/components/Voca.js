@@ -1,9 +1,11 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function Voca({ kor, eng, id, day, done }) {
+function Voca({ kor, eng, id, day, done, onDelete, onUpdate }) {
   // 상태관리에 따라 view가 바뀐다.
   const [isChecked, setIsChecked] = useState(done);
+  const [isHint, setIsHint] = useState(false);
   return (
     <Item className={done ? "done" : ""}>
       <div className="check">
@@ -15,16 +17,33 @@ function Voca({ kor, eng, id, day, done }) {
           checked={isChecked}
           onChange={() => {
             setIsChecked(!isChecked);
+            console.log(isChecked);
+            onUpdate({ id, kor, eng, day, done: isChecked });
           }}
         />
       </div>
       <div className="word">
         <span className="kor">{kor}</span>
-        <span className="eng">{eng}</span>
+        <span>{id}</span>
+        {isHint && <span className="eng">{eng}</span>}
       </div>
       <div className="btns">
-        <button className="del">del</button>
-        <button className="hint">hint</button>
+        <button
+          className="del"
+          onClick={() => {
+            onDelete(id);
+          }}
+        >
+          del
+        </button>
+        <button
+          className="hint"
+          onClick={() => {
+            setIsHint(!isHint);
+          }}
+        >
+          {isHint ? "hide" : "hint"}
+        </button>
       </div>
     </Item>
   );
@@ -44,6 +63,11 @@ const Item = styled.li`
     display: flex;
     span {
       margin-left: 20px;
+      font-size: 18px;
+      &.eng {
+        font-weight: bold;
+        color: #00f;
+      }
     }
   }
   .btns {
@@ -68,6 +92,10 @@ const Item = styled.li`
   }
   &.done {
     background-color: rgba(255, 255, 255, 0.5);
+    .hint {
+      pointer-events: none;
+      opacity: 0.5;
+    }
     .word {
       opacity: 0.5;
     }
