@@ -17,8 +17,8 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="/" element={<Days></Days>}></Route>
-          <Route path="/insert/day" element={<InsertVoca></InsertVoca>}></Route>
-          <Route path="/insert/voca" element={<InsertDay></InsertDay>}></Route>
+          <Route path="/insert/voca" element={<InsertVoca></InsertVoca>}></Route>
+          <Route path="/insert/day" element={<InsertDay></InsertDay>}></Route>
           <Route path="/day/:day" element={<Day></Day>}></Route>
         </Routes>
         <Footer></Footer>

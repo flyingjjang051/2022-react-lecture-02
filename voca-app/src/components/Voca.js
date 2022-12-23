@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 function Voca({ kor, eng, id, day, done }) {
+  // 상태관리에 따라 view가 바뀐다.
+  const [isChecked, setIsChecked] = useState(done);
   return (
     <Item className={done ? "done" : ""}>
       <div className="check">
-        <input type="checkbox" name="" id="" checked />
+        {/* <input type="checkbox" name="" id="" defaultChecked={done} /> */}
+        <input
+          type="checkbox"
+          name=""
+          id=""
+          checked={isChecked}
+          onChange={() => {
+            setIsChecked(!isChecked);
+          }}
+        />
       </div>
       <div className="word">
         <span className="kor">{kor}</span>
@@ -26,6 +37,9 @@ const Item = styled.li`
   padding: 10px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
   transition: all 0.25s ease;
+  .check {
+    margin-left: 20px;
+  }
   .word {
     display: flex;
     span {

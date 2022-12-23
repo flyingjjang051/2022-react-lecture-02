@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <Wrapper>
-      <h1>말해뭐해 VOCA</h1>
+      <h1>
+        <Link to="/">말해뭐해 VOCA</Link>
+      </h1>
       <nav>
         <ul>
           <li className="day btn">
@@ -30,12 +32,30 @@ const Wrapper = styled.header`
   }
   nav {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
     ul {
       display: flex;
       gap: 10px;
+      align-items: center;
+      height: 60px;
       li {
+        a {
+          padding: 15px;
+          color: #fff;
+          text-transform: uppercase;
+          border-radius: 5px;
+        }
+        &.voca {
+          a {
+            background-color: #f00;
+          }
+        }
+        &.day {
+          a {
+            background-color: #00f;
+          }
+        }
       }
     }
   }

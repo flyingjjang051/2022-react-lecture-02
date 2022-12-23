@@ -26,5 +26,27 @@ const GlobalStyle = createGlobalStyle`
   li {
     list-style: none;
   }
+  button {
+    border:none;
+    outline: none;
+    font-family: inherit;
+    background: none;
+  }
+  input[type="text"] {
+    outline: none;
+    border:none;
+    background-color: #fff;
+    color:#111;
+    border-radius: 5px;
+    min-height: 50px;
+    padding:0 15px;
+  }
+  select {
+    height: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+    outline: none;
+    border:none;
+  }
   `;
 export default GlobalStyle;
