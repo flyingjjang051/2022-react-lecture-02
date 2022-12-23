@@ -5,10 +5,8 @@ import Movie from "./Movie";
 
 export default function SearchResult() {
   const [searchParams] = useSearchParams();
-  //console.log(searchParams.get("movie"));
+  console.log(useSearchParams());
   const searchMovie = searchParams.get("movie");
-  const searchName = searchParams.get("name");
-  console.log("🚀 ~ file: SearchResult.js:11 ~ SearchResult ~ searchName", searchName);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {

@@ -74,15 +74,15 @@ export default function ProfileDetail() {
                 <dd>
                   {/* 20개만 뿌리기.... swiper 만들기 */}
                   <Swiper spaceBetween={10} slidesPerView={5} className="movie-list">
-                    {movies.map((item, idx) => {
-                      if (idx < 20) {
+                    {movies
+                      .filter((item, idx) => idx < 10)
+                      .map((item, idx) => {
                         return (
                           <SwiperSlide className="item">
                             <MovieItem title={item.title} poster={item.poster_path} id={item.id} key={idx}></MovieItem>
                           </SwiperSlide>
                         );
-                      }
-                    })}
+                      })}
                   </Swiper>
                 </dd>
               </dl>

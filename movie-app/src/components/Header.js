@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="header" id="header">
       <button onClick={back} className="back">
-        <i class="fa-solid fa-chevron-left"></i>
+        <i className="fa-solid fa-chevron-left"></i>
       </button>
       <h1>
         <Link to="/">MOVIE-APP</Link>

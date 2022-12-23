@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NoImg from "../assets/noimage.jpg";
 
 /*
 export default function Movie({ title, originalTitle, releaseDate, poster }) {
@@ -29,7 +30,8 @@ export default function Movie({ movieInfo }) {
     <li>
       <Link to={`/detail/${movieInfo.id}`}>
         <div className="img-box">
-          <img src={`https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`} alt="" />
+          {movieInfo.poster_path ? <img src={`https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`} alt="" /> : <img src={NoImg} className="no-image" alt="" />}
+
           <span className="point">{movieInfo.vote_average}</span>
         </div>
         <div className="info">

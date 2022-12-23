@@ -7,30 +7,25 @@ import Voca from "./Voca";
 function Day() {
   const { day } = useParams();
   const [vocas, setVocas] = useState([]);
+  const api = axios.create({
+    baseURL: "http://localhost:5000/",
+  });
   useEffect(() => {
-    axios.get(`http://localhost:5000/vocas?day=${day}`).then((response) => {
+    api.get(`vocas?day=${day}`).then((response) => {
       console.log(response.data);
       setVocas(response.data);
     });
   }, []);
-  const onDelete = (id) => {
-    //console.log("지울겁니다.");
-    axios.delete(`http://localhost:5000/vocas/${id}`).then((response) => {
-      //console.log(response);
-      axios.get(`http://localhost:5000/vocas?day=${day}`).then((response) => {
-        console.log(response.data);
-        setVocas(response.data);
-      });
-    });
+  const onDelete = async (id) => {
+    await api.delete(`vocas/${id}`);
+    const response = await api.get(`vocas?day=${day}`);
+    setVocas(response.data);
   };
-  const onUpdate = (obj) => {
+  const onUpdate = async (obj) => {
     //console.log(obj);
-    axios.put(`http://localhost:5000/vocas/${obj.id}`, { ...obj, done: !obj.done }).then((response) => {
-      //console.log(response);
-      axios.get(`http://localhost:5000/vocas?day=${obj.day}`).then((response) => {
-        setVocas(response.data);
-      });
-    });
+    await api.put(`vocas/${obj.id}`, { ...obj, done: !obj.done });
+    const response = await api.get(`vocas?day=${obj.day}`);
+    setVocas(response.data);
   };
 
   return (

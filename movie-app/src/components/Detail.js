@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Profile from "./Profile";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,29 +7,35 @@ import "swiper/css";
 
 export default function Detail() {
   //const [count, setCount] = useState(0);
-  const movieId = useParams().id;
-  console.log("🚀 ~ file: Detail.js:7 ~ Detail ~ movieId", movieId);
+  const { id } = useParams();
+  console.log("🚀 ~ file: Detail.js:7 ~ Detail ~ id", id);
   const [detail, setDetail] = useState({});
   const [genres, setGenres] = useState("");
   const [cast, setCast] = useState([]);
-  //useState, map
-  useEffect(() => {
+
+  const getDetail = useCallback(() => {
     //prettier-ignore
     axios
-    .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=c3531c0fd9611d97111b750a606e8fdb&language=ko-KR`)
+    .get(`https://api.themoviedb.org/3/movie/${id}?api_key=c3531c0fd9611d97111b750a606e8fdb&language=ko-KR`)
     .then((response)=>{
       setDetail(response.data);
-      console.log(detail);
       setGenres(response.data.genres.map(item=>item.name).join("/"));
     })
-
+  }, [id]);
+  const getCast = useCallback(() => {
     //prettier-ignore
-    axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=c3531c0fd9611d97111b750a606e8fdb&language=ko-KR`)
-    .then((response)=>{
-      //console.log(response.data.cast);
+    axios
+    .get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=c3531c0fd9611d97111b750a606e8fdb&language=ko-KR`)
+    .then((response) => {
       setCast(response.data.cast);
-    })
-  }, []);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    getDetail();
+    getCast();
+    //prettier-ignore
+  }, [getDetail, getCast]);
 
   return (
     <>

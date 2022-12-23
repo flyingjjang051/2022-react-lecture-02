@@ -4,7 +4,7 @@ const { Kakao } = window;
 
 export default function KakaoSharedButton({ data }) {
   console.log(window);
-
+  const url = "https://aesthetic-sfogliatella-f6ad1c.netlify.app/";
   useEffect(() => {
     if (!Kakao.isInitialized()) {
       Kakao.init("4aaea00d9b16ab844633eead85d9d655");
@@ -16,19 +16,19 @@ export default function KakaoSharedButton({ data }) {
       content: {
         title: "나만없어 고양이~~",
         description: `당신에게 맞는 고양이는 ${data.name}입니다.`,
-        imageUrl: data.image,
+        imageUrl: url + data.image,
         link: {
           // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-          mobileWebUrl: "https://developers.kakao.com",
-          webUrl: "https://developers.kakao.com",
+          mobileWebUrl: url,
+          webUrl: url,
         },
       },
       buttons: [
         {
           title: "나도 고양이 집사가 되고 싶다면~~",
           link: {
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com",
+            mobileWebUrl: url,
+            webUrl: url,
           },
         },
       ],

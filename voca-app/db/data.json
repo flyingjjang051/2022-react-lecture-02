@@ -27,30 +27,13 @@
     {
       "day": 7,
       "id": 7
+    },
+    {
+      "day": 8,
+      "id": 8
     }
   ],
   "vocas": [
-    {
-      "kor": "호랑이",
-      "eng": "tiger",
-      "done": true,
-      "id": 1,
-      "day": 1
-    },
-    {
-      "kor": "사자",
-      "eng": "lion",
-      "done": true,
-      "id": 2,
-      "day": 1
-    },
-    {
-      "id": 3,
-      "kor": "사과",
-      "eng": "apple",
-      "day": 1,
-      "done": true
-    },
     {
       "id": 4,
       "kor": "딸기",
@@ -70,21 +53,21 @@
       "kor": "강아지",
       "eng": "puppy",
       "day": 1,
-      "done": true
-    },
-    {
-      "id": 8,
-      "kor": "소",
-      "eng": "cow",
-      "day": 1,
       "done": false
     },
     {
-      "day": "4",
+      "id": 9,
       "kor": "겨울",
       "eng": "winter",
-      "done": false,
-      "id": 9
+      "day": "4",
+      "done": false
+    },
+    {
+      "id": 10,
+      "kor": "태양",
+      "eng": "sub",
+      "day": "1",
+      "done": false
     }
   ]
 }

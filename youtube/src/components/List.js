@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import YouTube from "react-youtube";
 
 export default function List() {
   const [videoList, setVideoList] = useState([]);
@@ -18,17 +19,8 @@ export default function List() {
     <div>
       {videoList.map((item, idx) => {
         //return <img src={item.snippet.thumbnails.medium.url} alt="" key={idx}></img>;
-        return (
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${item.id.videoId}`}
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        );
+        const { title } = item.snippet;
+        return <YouTube videoId={item.id.videoId} title={title}></YouTube>;
       })}
     </div>
   );
