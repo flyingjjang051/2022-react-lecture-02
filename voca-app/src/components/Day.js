@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import Voca from "./Voca";
 
 function Day() {
   const { day } = useParams();
@@ -17,19 +18,7 @@ function Day() {
       <h2>오늘 학습할 단어는...</h2>
       <ul>
         {vocas.map((item, idx) => {
-          return (
-            <li key={item.id}>
-              <div className="check">
-                <input type="checkbox" name="" id="" />
-              </div>
-              <div className="kor">{item.kor}</div>
-              <div className="eng">{item.eng}</div>
-              <div>
-                <button>del</button>
-                <button>hint</button>
-              </div>
-            </li>
-          );
+          return <Voca kor={item.kor} eng={item.eng} done={item.done} id={item.id} day={item.day}></Voca>;
         })}
       </ul>
     </Wrapper>
@@ -45,19 +34,9 @@ const Wrapper = styled.div`
   ul {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
     gap: 10px;
-    li {
-      a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #111;
-        color: #fff;
-        border-radius: 100px;
-        padding: 20px 40px;
-        text-transform: uppercase;
-      }
-    }
   }
 `;
 
