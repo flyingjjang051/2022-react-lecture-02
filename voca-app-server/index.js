@@ -71,10 +71,46 @@ app.post("/vocas", (req, res) => {
 });
 
 app.get("/vocas", (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
+  const { day } = req.query;
+  vocasSchema.find({ day: day }).then((response) => {
+    //console.log(response);
+    res.json(response);
+  });
 });
 app.get("/vocas/:day", (req, res) => {
   console.log(req.params);
+});
+
+app.delete("/vocas/:id", (req, res) => {
+  console.log("delete");
+  const { id } = req.params;
+  vocasSchema
+    .deleteOne({ _id: id })
+    .then((response) => {
+      console.log(response);
+      res.json({ state: "ok" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+app.put("/vocas/:id", (req, res) => {
+  const { id } = req.params;
+  vocasSchema
+    .updateOne(
+      { _id: id },
+      {
+        $set: { done: req.body.done },
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      res.json({ state: "ok" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.listen(PORT, () => {

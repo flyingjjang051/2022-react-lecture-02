@@ -16,7 +16,6 @@ function Voca({ kor, eng, id, day, done, onDelete, onUpdate }) {
           checked={isChecked}
           onChange={() => {
             setIsChecked(!isChecked);
-            console.log(isChecked);
             onUpdate({ id, kor, eng, day, done: isChecked });
           }}
         />

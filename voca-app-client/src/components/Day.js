@@ -27,7 +27,6 @@ function Day() {
     setVocas(response.data);
   };
   const onUpdate = async (obj) => {
-    //console.log(obj);
     await axios.put(`http://localhost:5000/vocas/${obj.id}`, { ...obj, done: !obj.done });
     const response = await axios.get(`http://localhost:5000/vocas?day=${obj.day}`);
     setVocas(response.data);
@@ -38,7 +37,7 @@ function Day() {
       <h2>오늘 학습할 단어는...</h2>
       <ul>
         {vocas.map((item, idx) => {
-          return <Voca kor={item.kor} eng={item.eng} done={item.done} id={item.id} day={item.day} onDelete={onDelete} onUpdate={onUpdate} key={item.id}></Voca>;
+          return <Voca kor={item.kor} eng={item.eng} done={item.done} id={item._id} day={item.day} onDelete={onDelete} onUpdate={onUpdate} key={item._id}></Voca>;
         })}
       </ul>
     </Wrapper>
