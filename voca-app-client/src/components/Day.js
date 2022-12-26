@@ -7,24 +7,29 @@ import Voca from "./Voca";
 function Day() {
   const { day } = useParams();
   const [vocas, setVocas] = useState([]);
-  const api = axios.create({
-    baseURL: "http://localhost:5000/",
-  });
+
   useEffect(() => {
-    api.get(`vocas?day=${day}`).then((response) => {
+    axios.get(`http://localhost:5000/vocas?day=${day}`).then((response) => {
       console.log(response.data);
       setVocas(response.data);
     });
   }, []);
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5000/vocas/${day}`).then((response) => {
+  //     console.log(response.data);
+  //     setVocas(response.data);
+  //   });
+  // }, []);
   const onDelete = async (id) => {
-    await api.delete(`vocas/${id}`);
-    const response = await api.get(`vocas?day=${day}`);
+    await axios.delete(`http://localhost:5000/vocas/${id}`);
+    const response = await axios.get(`http://localhost:5000/vocas?day=${day}`);
     setVocas(response.data);
   };
   const onUpdate = async (obj) => {
     //console.log(obj);
-    await api.put(`vocas/${obj.id}`, { ...obj, done: !obj.done });
-    const response = await api.get(`vocas?day=${obj.day}`);
+    await axios.put(`http://localhost:5000/vocas/${obj.id}`, { ...obj, done: !obj.done });
+    const response = await axios.get(`http://localhost:5000/vocas?day=${obj.day}`);
     setVocas(response.data);
   };
 

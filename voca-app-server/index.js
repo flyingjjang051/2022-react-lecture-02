@@ -1,4 +1,5 @@
 const daySchema = require("./models/DaySchema");
+const vocasSchema = require("./models/VocaSchema");
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -17,33 +18,6 @@ app.get("/", (req, res) => {
   res.send("hello express");
 });
 app.get("/days", (req, res) => {
-  // db에서 데이터 긁어서 json으로 리턴
-  // res.json([
-  //   {
-  //     id: 1,
-  //     day: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //     day: 2,
-  //   },
-  //   {
-  //     id: 3,
-  //     day: 3,
-  //   },
-  //   {
-  //     day: 4,
-  //     id: 4,
-  //   },
-  //   {
-  //     day: 5,
-  //     id: 5,
-  //   },
-  //   {
-  //     day: 6,
-  //     id: 6,
-  //   },
-  // ]);
   daySchema
     .find()
     .then((response) => {
@@ -75,6 +49,32 @@ app.post("/days", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+app.post("/vocas", (req, res) => {
+  const { day, kor, eng, done } = req.body;
+  const insertVocaItem = new vocasSchema({
+    day,
+    kor,
+    eng,
+    done,
+  });
+  insertVocaItem
+    .save()
+    .then(() => {
+      res.json({ state: "ok" });
+      console.log("잘 들어갔습니다.");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.get("/vocas", (req, res) => {
+  console.log(req.query);
+});
+app.get("/vocas/:day", (req, res) => {
+  console.log(req.params);
 });
 
 app.listen(PORT, () => {

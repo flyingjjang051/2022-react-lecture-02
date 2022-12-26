@@ -1,7 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 function InsertVoca() {
+  const korRef = useRef();
+  const engRef = useRef();
   const [kor, setkor] = useState("");
   const [eng, setEng] = useState("");
   const [selectDay, setSelectDay] = useState(1);
@@ -16,6 +18,11 @@ function InsertVoca() {
   const insertVoca = () => {
     axios.post("http://localhost:5000/vocas", { day: selectDay, kor: kor, eng: eng, done: false }).then((response) => {
       //console.log(response);
+      if (response.data.state === "ok") {
+        alert("단어가 입력되었습니다.");
+        korRef.current.value = "";
+        engRef.current.value = "";
+      }
     });
   };
   return (
@@ -28,6 +35,7 @@ function InsertVoca() {
           onChange={(e) => {
             setkor(e.target.value);
           }}
+          ref={korRef}
         />
         <input
           type="text"
@@ -35,6 +43,7 @@ function InsertVoca() {
           onChange={(e) => {
             setEng(e.target.value);
           }}
+          ref={engRef}
         />
       </div>
       <div className="select-box">
