@@ -12,7 +12,7 @@ function InsertDay() {
     });
   }, []);
   const insertDay = () => {
-    axios.post("http://localhost:5000/days", { day: 9, id: 1003 }).then((response) => {
+    axios.post("http://localhost:5000/days", { day: days.length + 1, id: days.length + 1 }).then((response) => {
       console.log(response);
       alert("날짜가 추가되었습니다.");
       navigate("/");
