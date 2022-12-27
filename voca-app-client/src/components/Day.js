@@ -9,7 +9,7 @@ function Day() {
   const [vocas, setVocas] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/vocas?day=${day}`).then((response) => {
+    axios.get(`https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/vocas?day=${day}`).then((response) => {
       console.log(response.data);
       setVocas(response.data);
     });
@@ -22,13 +22,13 @@ function Day() {
   //   });
   // }, []);
   const onDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/vocas/${id}`);
-    const response = await axios.get(`http://localhost:5000/vocas?day=${day}`);
+    await axios.delete(`https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/vocas/${id}`);
+    const response = await axios.get(`https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/vocas?day=${day}`);
     setVocas(response.data);
   };
   const onUpdate = async (obj) => {
-    await axios.put(`http://localhost:5000/vocas/${obj.id}`, { ...obj, done: !obj.done });
-    const response = await axios.get(`http://localhost:5000/vocas?day=${obj.day}`);
+    await axios.put(`https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/vocas/${obj.id}`, { ...obj, done: !obj.done });
+    const response = await axios.get(`https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/vocas?day=${obj.day}`);
     setVocas(response.data);
   };
 

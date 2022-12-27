@@ -7,12 +7,12 @@ function InsertDay() {
   const [days, setDays] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:5000/days").then((response) => {
+    axios.get("https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/days").then((response) => {
       setDays(response.data);
     });
   }, []);
   const insertDay = () => {
-    axios.post("http://localhost:5000/days", { day: days.length + 1, id: days.length + 1 }).then((response) => {
+    axios.post("https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/days", { day: days.length + 1, id: days.length + 1 }).then((response) => {
       console.log(response);
       alert("날짜가 추가되었습니다.");
       navigate("/");

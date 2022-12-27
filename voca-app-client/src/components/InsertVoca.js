@@ -10,13 +10,13 @@ function InsertVoca() {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/days").then((response) => {
+    axios.get("https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/days").then((response) => {
       setDays(response.data);
     });
   }, []);
 
   const insertVoca = () => {
-    axios.post("http://localhost:5000/vocas", { day: selectDay, kor: kor, eng: eng, done: false }).then((response) => {
+    axios.post("https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/vocas", { day: selectDay, kor: kor, eng: eng, done: false }).then((response) => {
       //console.log(response);
       if (response.data.state === "ok") {
         alert("단어가 입력되었습니다.");

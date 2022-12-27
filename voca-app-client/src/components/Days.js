@@ -9,7 +9,7 @@ function Days() {
     // axios.get("http://localhost:5000/days").then((response) => {
     //   setDays(response.data);
     // });
-    axios.get("http://localhost:5000/days").then((response) => {
+    axios.get("https://port-0-voca-app-server-ll32glc4cixp4.gksl2.cloudtype.app/days").then((response) => {
       console.log(response.data);
       setDays(response.data);
     });
