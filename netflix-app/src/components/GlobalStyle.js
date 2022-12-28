@@ -42,5 +42,8 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     border:none;
   }
+  img {
+    vertical-align: top;
+  }
 `;
 export default GlobalStyle;
