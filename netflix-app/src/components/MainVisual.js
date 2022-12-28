@@ -3,8 +3,13 @@ import styled from "styled-components";
 import api from "../api/api";
 import requests from "../api/requests";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade } from "swiper";
+import { EffectFade, EffectCube, Navigation, Autoplay, Pagination } from "swiper";
 import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/effect-cube";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "../assets/css/pagination.css";
 import MovieItem from "./MovieItem";
 
 function MainVisual() {
@@ -24,7 +29,7 @@ function MainVisual() {
   //console.log(ellipsis("동해물과 백두산이 마르고 닳도록", 100));
   return (
     <Container>
-      <Swiper modules={[EffectFade]} effect="fade">
+      <Swiper modules={[EffectFade, EffectCube, Pagination]} effect="cube" loop={true} pagination={{ clickable: true }}>
         {movies
           .filter((item, idx) => {
             if (idx < 10) {
