@@ -45,5 +45,8 @@ const GlobalStyle = createGlobalStyle`
   img {
     vertical-align: top;
   }
+  .nav {
+    text-shadow: 5px 5px 10px rgba(0,0,0,0.25);
+  }
 `;
 export default GlobalStyle;
