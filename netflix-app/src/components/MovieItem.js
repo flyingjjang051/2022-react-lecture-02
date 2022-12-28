@@ -25,8 +25,16 @@ function MovieItem({ title, src, desc, type, id, showVideo }) {
                     },
                   })
                   .then((response) => {
-                    console.log(response.data);
-                    showVideo(response.data.videos.results[0].key);
+                    //console.log(response.data.videos.results);
+                    const videos = response.data.videos.results;
+                    if (videos.length > 0) {
+                      showVideo(response.data.videos.results[0].key);
+                    } else {
+                      showVideo(null);
+                    }
+                  })
+                  .catch((err) => {
+                    showVideo(null);
                   });
               }}
             >

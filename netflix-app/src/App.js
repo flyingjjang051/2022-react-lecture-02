@@ -23,7 +23,7 @@ function App() {
       <GlobalStyle></GlobalStyle>
       <Header></Header>
       <MainVisual showVideo={showVideo}></MainVisual>
-      <MainContents></MainContents>
+      <MainContents showVideo={showVideo}></MainContents>
       {view && <VideoBox viewChange={viewChange} showVideo={showVideo} videoId={videoId}></VideoBox>}
       <Footer></Footer>
     </div>

@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../assets/css/pagination.css";
 
-function Rows({ title, fetchURL, type, showNum }) {
+function Rows({ title, fetchURL, type, showNum, showVideo }) {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     loadMovieData();
@@ -46,7 +46,7 @@ function Rows({ title, fetchURL, type, showNum }) {
             return (
               <div className="swiper-box">
                 <SwiperSlide>
-                  <MovieItem title={item.title ? item.title : item.name} src={item.poster_path} desc={item.overview} type={type}></MovieItem>
+                  <MovieItem title={item.title ? item.title : item.name} src={item.poster_path} desc={item.overview} type={type} id={item.id} showVideo={showVideo}></MovieItem>
                 </SwiperSlide>
               </div>
             );
