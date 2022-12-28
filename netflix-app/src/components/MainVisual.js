@@ -11,14 +11,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import MovieItem from "./MovieItem";
 
-function MainVisual() {
+function MainVisual({ showVideo }) {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     loadMovieData();
   }, []);
   const loadMovieData = async () => {
     const result = await api.get(requests.fetchNowPlaying);
-    //console.log(result.data.results[0]);
     setMovies(result.data.results);
   };
   const ellipsis = (str, total) => {
@@ -46,7 +45,7 @@ function MainVisual() {
             return (
               <SwiperSlide>
                 {/* <img src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`} alt={item.title} /> */}
-                <MovieItem title={item.title} src={item.backdrop_path} desc={ellipsis(item.overview, 150)} type="main"></MovieItem>
+                <MovieItem title={item.title} src={item.backdrop_path} desc={ellipsis(item.overview, 150)} type="main" id={item.id} showVideo={showVideo}></MovieItem>
               </SwiperSlide>
             );
           })}

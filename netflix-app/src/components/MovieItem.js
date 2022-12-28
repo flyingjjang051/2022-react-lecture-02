@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import api from "../api/api";
+import requests from "../api/requests";
 
-function MovieItem({ title, src, desc, type }) {
+function MovieItem({ title, src, desc, type, id, showVideo }) {
   return (
     <Container>
       <div className={type}>
@@ -11,7 +13,25 @@ function MovieItem({ title, src, desc, type }) {
         <div className="info">
           <h2>{title}</h2>
           <div className="btns">
-            <button className="play">play</button>
+            <button
+              className="play"
+              onClick={() => {
+                //console.log(id);
+                //   movie/19090
+                api
+                  .get(`${requests.fetchMovie}/${id}`, {
+                    params: {
+                      append_to_response: "videos",
+                    },
+                  })
+                  .then((response) => {
+                    console.log(response.data);
+                    showVideo(response.data.videos.results[0].key);
+                  });
+              }}
+            >
+              play
+            </button>
             <button className="more">more information</button>
           </div>
           <p>{desc}</p>
