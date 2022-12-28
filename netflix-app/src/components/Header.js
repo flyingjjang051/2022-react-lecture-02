@@ -17,6 +17,9 @@ const Container = styled.header`
   padding: 0 50px;
   background-color: #fff;
   box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100vw;
+  z-index: 999;
 `;
 const Logo = styled.h1`
   display: flex;
